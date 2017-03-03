@@ -10,6 +10,7 @@
 <link rel="import" href="../../px-demo/px-demo-props.html" />
 <link rel="import" href="../../px-demo/px-demo-interactive.html" />
 <link rel="import" href="../../px-demo/px-demo-component-snippet.html" />
+<link rel="import" href="../../px-demo/px-demo-code-editor.html" />
 
 <!-- Imports for this componnent -->
 <link rel="import" href="../../px-demo/css/px-demo-styles.html" />
@@ -39,18 +40,14 @@
       <!-- Props -->
       <px-demo-props props="{{props}}" config="[[chosenConfig]]"></px-demo-props>
 
+      <!-- Code Editor -->
+      <px-demo-code-editor props="{{props}}"></px-demo-code-editor>
+
       <!-- Component ---------------------------------------------------------->
       <px-demo-component>
-        <!--Figure out how to make this work with the new demo-->
-        <!--<template is="dom-if" if="{{props.preventRangeSelection.value}}">
-          <p><strong>px-datetime-selected</strong> fired <strong>0</strong> time(s)</p>
-          <p id="dateTimeString{{indexPlusOne(index)}}">Current dateTime object:</p>
-        </template>
-
-        <template is="dom-if" if="{{!props.preventRangeSelection.value}}">
-          <p id="counterRange"><strong>px-datetime-range-selected</strong> fired <strong>0</strong> time(s)</p>
-          <p id="rangeString">Current range object:</p>
-        </template>-->
+        <p class=u-mb0>Event fired: <strong>px-datetime-range-submitted</strong></p>
+        <p class="zeta u-mt0">See API Reference below for more details</p>
+        <p class="u-mb++">Current range object: <strong>{{props.range.value.from}}</strong> To: <strong>{{props.range.value.to}}</strong></p>
 
         <px-datetime-range-field
             range="{{props.range.value}}"
@@ -194,21 +191,21 @@
         type: String,
         defaultValue: 'YYYY/MM/DD',
         inputType: 'text',
-        inputPlaceholder: 'YYYY/MM/DD',
+        inputPlaceholder: 'YYYY/MM/DD'
       },
 
       timeFormat: {
         type: String,
         defaultValue: 'HH:mm:ss',
         inputType: 'text',
-        inputPlaceholder: 'HH:mm:ss',
+        inputPlaceholder: 'HH:mm:ss'
       },
 
       timeZone: {
         type: String,
         defaultValue: 'UTC',
         inputType: 'text',
-        inputPlaceholder: 'America/Los_Angeles',
+        inputPlaceholder: 'America/Los_Angeles'
       },
 
       showTimeZone: {
@@ -219,27 +216,20 @@
       },
 
       range: {
-        type: String,
-        defaultValue: {"from": "2015-07-01T01:00:00.000Z", "to": "2016-07-08T14:00:00.000Z"},
-        inputType: 'text',
-        inputPlaceholder: 'object',
-        inputDisabled: true
+        type: Object,
+        defaultValue: {
+          from : "2015-07-01T01:00:00.000Z",
+          to : "2016-07-08T14:00:00.000Z"
+        },
+        inputType: 'code:JSON'
       }
 
 
     },
 
     ready: function () {
-    //   document.addEventListener('px-datetime-range-submitted', function(evt) {
-    //   counter++;
-    //   for(var i=1; i<=optionsArray.length; i++) {
-    //     var span = document.getElementById('counter'+i);
-    //     span.innerHTML = '<strong>px-datetime-range-submitted</strong> fired <strong>' + counter + '</strong> time(s)';
-    //   }
-    // });
-
       this.linksIncludes = ['px-datetime-common/px-polygit-imports-datetime.html','px-polymer-font-awesome/polymer-font-awesome.html'];
-
     }
+
   });
 </script>

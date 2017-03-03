@@ -1,3 +1,7 @@
+v0.5.8
+==================
+* add Event Fired information
+
 v0.5.7
 ==================
 * add link to Moment documentation
