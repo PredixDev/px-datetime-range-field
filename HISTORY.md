@@ -1,3 +1,7 @@
+v0.5.9
+==================
+* fixed responsive spacing per design feedback
+
 v0.5.8
 ==================
 * add Event Fired information

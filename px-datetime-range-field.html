@@ -34,8 +34,8 @@ Custom property | Description | Default
     <style include="px-datetime-range-field-styles"></style>
 
     <div class="form flex flex--middle flex--wrap">
-      <div id="fromFields" class="flex flex--middle">
-        <span class=a11y>from</span>
+      <div id="fromFields" class="flex flex--middle u-mb">
+        <span class="a11y">from</span>
         <px-datetime-field
           id="fromDate"
           moment-obj="{{fromMoment}}"
@@ -50,8 +50,8 @@ Custom property | Description | Default
           block-past-dates="{{blockPastDates}}">
         </px-datetime-field>
       </div>
-      <span class="caps u-mh- to">to</span>
-      <div id="toFields" class="flex flex--middle">
+      <span class="caps u-mh- u-mb to">to</span>
+      <div id="toFields" class="flex flex--middle u-mb">
         <px-datetime-field
           id="toDate"
           moment-obj="{{toMoment}}"
@@ -87,7 +87,7 @@ Custom property | Description | Default
         <px-datetime-buttons
           id="dtBtns"
           is-submit-button-valid="[[isValid]]"
-          class="u-ml">
+          class="u-ml u-mb">
         </px-datetime-buttons>
       </template>
     </div>
