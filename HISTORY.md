@@ -1,3 +1,7 @@
+v0.5.10
+==================
+* add Cloud Flare cache reset
+
 v0.5.9
 ==================
 * fixed responsive spacing per design feedback
