@@ -105,7 +105,11 @@
        */
       props: {
         type: Object,
-        value: function(){ return this.demoProps; }
+        value: function(){ 
+          var props =  this.demoProps; 
+              props.timeZone.inputLocalCandidates = Px.moment.tz.names();
+            return props;
+          }
       },
 
       /**
@@ -204,8 +208,8 @@
       timeZone: {
         type: String,
         defaultValue: 'UTC',
-        inputType: 'text',
-        inputPlaceholder: 'America/Los_Angeles'
+        inputType: 'typeahead',
+        inputPlaceholder: 'UTC'
       },
 
       showTimeZone: {
@@ -223,8 +227,6 @@
         },
         inputType: 'code:JSON'
       }
-
-
     },
 
     ready: function () {
