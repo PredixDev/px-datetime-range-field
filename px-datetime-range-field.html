@@ -7,6 +7,7 @@
 <link rel="import" href="../px-datetime-common/px-datetime-buttons.html"/>
 <link rel="import" href="../px-datetime-field/px-datetime-field.html"/>
 <link rel="import" href="../px-datetime-common/validate.html"/>
+<link rel="import" href="../px-localize-behavior/px-localize-behavior.html"/>
 <!-- <script src="../moment/moment.js"></script> -->
 
 <!--
@@ -24,7 +25,7 @@ Px datetime component that displays and validates a date time range.
   <template>
     <div class="form flex flex--middle flex--wrap">
       <div id="fromFields" class="flex flex--middle">
-        <span class=a11y>from</span>
+        <span class=a11y>[[localize('from')]]</span>
         <px-datetime-field
           id="fromDate"
           moment-obj="{{fromMoment}}"
@@ -39,7 +40,7 @@ Px datetime component that displays and validates a date time range.
           block-past-dates="{{blockPastDates}}">
         </px-datetime-field>
       </div>
-      <span class="caps u-mh- to">to</span>
+      <span class="caps u-mh- to">[[localize('TO')]]</span>
       <div id="toFields" class="flex flex--middle">
         <px-datetime-field
           id="toDate"
@@ -91,7 +92,8 @@ Px datetime component that displays and validates a date time range.
     behaviors: [
       pxDatetimeRangeBehavior,
       pxDatetimeButtonBehavior,
-      validate
+      validate,
+      PxLocalizeBehavior
     ],
 
     properties: {
