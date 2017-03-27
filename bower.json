@@ -1,6 +1,6 @@
 {
   "name": "px-datetime-range-field",
-  "version": "0.5.11",
+  "version": "0.6.0",
   "main": [
     "px-datetime-range-field.html"
   ],
@@ -34,8 +34,7 @@
     "px-spacing-design": "^0.4.0",
     "px-datetime-common": "^0.7.0",
     "px-datetime-field": "^0.6.0",
-    "px-theme": "^2.0.3",
-    "px-localize-behavior": "^0.0.3"
+    "px-theme": "^2.0.3"
   },
   "devDependencies": {
     "px-starter-kit-design": "^0.7.0",

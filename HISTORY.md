@@ -1,6 +1,10 @@
+v0.6.0
+==================
+* added localization
+
 v0.5.11
 ==================
-* converted timeZone property to typeahead 
+* converted timeZone property to typeahead
 
 v0.5.10
 ==================

@@ -7,7 +7,7 @@
 <link rel="import" href="../px-datetime-common/px-datetime-buttons.html"/>
 <link rel="import" href="../px-datetime-field/px-datetime-field.html"/>
 <link rel="import" href="../px-datetime-common/validate.html"/>
-<link rel="import" href="../px-localize-behavior/px-localize-behavior.html"/>
+
 <!-- <script src="../moment/moment.js"></script> -->
 
 <!--
@@ -78,7 +78,7 @@ Custom property | Description | Default
                 class="tooltip-font"
                 smart-orientation
                 orientation="top"
-                tooltip-message="FROM date cannot be later than TO date">
+                tooltip-message="[[localize('from can not be later than to')]]">
               </px-tooltip>
             </template>
           </div>
@@ -104,8 +104,7 @@ Custom property | Description | Default
     behaviors: [
       pxDatetimeRangeBehavior,
       pxDatetimeButtonBehavior,
-      validate,
-      PxLocalizeBehavior
+      validate
     ],
 
     properties: {
