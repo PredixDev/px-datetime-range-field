@@ -11,21 +11,33 @@
 <!-- <script src="../moment/moment.js"></script> -->
 
 <!--
-Px datetime component that displays and validates a date time range.
+The datetime components rely on <a href="https://momentjs.com/" target="_blank">Moment.js</a> and <a href="https://momentjs.com/timezone/" target="_blank">Moment Timezone</a>.
 
-### Usage
+#### Usage
 
     <px-datetime-range-field range="{{...}}">
     </px-datetime-range-field>
 
+#### Styling
+The following custom properties are available for styling. Please also refer to px-forms-design for additional style variables used by this component.
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--px-datetime-range-field-to-color` | Text color of the "TO" between start and end date input fields | `$black`
+`--px-datetime-range-field-text-color-validation--failed` | Outline color for the field when validation fails | `$alert-red`
+
 @demo demo.html
 -->
+
+<link rel="import" href="css/px-datetime-range-field-styles.html">
+
 <dom-module id="px-datetime-range-field">
-  <link rel="import" type="css" href="css/px-datetime-range-field.css"/>
   <template>
+    <style include="px-datetime-range-field-styles"></style>
+
     <div class="form flex flex--middle flex--wrap">
-      <div id="fromFields" class="flex flex--middle">
-        <span class=a11y>[[localize('from')]]</span>
+      <div id="fromFields" class="flex flex--middle u-mb">
+        <span class="a11y">[[localize('from')]]</span>
         <px-datetime-field
           id="fromDate"
           moment-obj="{{fromMoment}}"
@@ -40,8 +52,8 @@ Px datetime component that displays and validates a date time range.
           block-past-dates="{{blockPastDates}}">
         </px-datetime-field>
       </div>
-      <span class="caps u-mh- to">[[localize('TO')]]</span>
-      <div id="toFields" class="flex flex--middle">
+      <span class="caps u-mh- u-mb to">[[localize('TO')]]</span>
+      <div id="toFields" class="flex flex--middle u-mb">
         <px-datetime-field
           id="toDate"
           moment-obj="{{toMoment}}"
@@ -59,7 +71,7 @@ Px datetime component that displays and validates a date time range.
           <div class="fa fa-fw validation-container u-ml--">
             <iron-icon
               class$="{{_getValidationIconClass(_isRangeValid)}}"
-              icon="polymer-font-awesome:fa-warning">
+              icon="fa:fa-exclamation-circle">
             </iron-icon>
             <template is="dom-if" if="{{!_isRangeValid}}">
               <px-tooltip
@@ -77,7 +89,7 @@ Px datetime component that displays and validates a date time range.
         <px-datetime-buttons
           id="dtBtns"
           is-submit-button-valid="[[isValid]]"
-          class="u-ml">
+          class="u-ml u-mb">
         </px-datetime-buttons>
       </template>
     </div>

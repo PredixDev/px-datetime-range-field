@@ -1,3 +1,127 @@
+v0.5.11
+==================
+* converted timeZone property to typeahead 
+
+v0.5.10
+==================
+* add Cloud Flare cache reset
+
+v0.5.9
+==================
+* fixed responsive spacing per design feedback
+
+v0.5.8
+==================
+* add Event Fired information
+
+v0.5.7
+==================
+* add link to Moment documentation
+
+v0.5.6
+==================
+* added styling section to API documentation
+
+v0.5.5
+==================
+* fixed typo in component description
+
+v0.5.4
+==================
+* moved theming style includes and updated ghp.sh
+* updated api for new colors
+
+v0.5.3
+==================
+* Update to px-demo
+* removed demosass
+* Updated to cool grays
+
+v0.5.2
+==================
+* Update colors design to pick up new colors
+
+v0.5.1
+==================
+* changing ghp.sh to account for Alpha releases
+
+v0.5.0
+==================
+* Updated dependencies
+
+v0.4.14
+==================
+* changing browser in wct testing from safari 8 to safari 10 on elcapitan
+
+v0.4.13
+==================
+* changing all devDeps to ^
+
+v0.4.12
+==================
+* Update px-theme to 2.0.1 and update test fixtures
+
+v0.4.11
+==================
+* update dependencies for dropdown
+
+v0.4.10
+==================
+* removing px-theme style call
+
+
+v0.4.9
+==================
+* changing Gruntfile.js to gulpfile.js
+
+v0.4.8
+==================
+* added style variable for theming
+
+v0.4.7
+==================
+* bower updating px-demo-snippet
+
+v0.4.6
+==================
+* fixed codepen
+
+v0.4.5
+==================
+* Update dependencies
+
+v0.4.4
+==================
+* Latest demo snippet component & latest gulpfile
+
+v0.4.3
+==================
+* Correcting a minor dep version issue
+
+v0.4.2
+==================
+* Added correct event listener to demo event counter
+
+v0.4.1
+==================
+* Fixed demo event counter
+
+v0.4.0
+==================
+* Uprev
+
+v0.3.14
+==================
+* changed moment.tz to Px.moment.tz in tests
+
+v0.3.13
+==================
+* added overflow to demoContainer and removed flex__wrap from mega-demo
+
+v0.3.12
+==================
+* updated mega demo styles and bower px-demo-snippet to ^
+
 v0.3.11
 ==================
 * Added --px-datetime-range-field-to-color

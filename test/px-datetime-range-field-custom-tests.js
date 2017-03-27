@@ -156,9 +156,9 @@ function runCustomTests() {
 
     test('datetime kept in sync when changing moment', function() {
 
-      range.fromMoment = moment.tz(moment("2013-04-07T00:00:00.000Z"), range.timeZone);
+      range.fromMoment = Px.moment.tz(moment("2013-04-07T00:00:00.000Z"), range.timeZone);
       assert.equal(range.fromMoment.toISOString(), range.range.from);
-      range.toMoment = moment.tz(moment("2014-04-07T00:00:00.000Z"), range.timeZone);
+      range.toMoment = Px.moment.tz(moment("2014-04-07T00:00:00.000Z"), range.timeZone);
       assert.equal(range.toMoment.toISOString(), range.range.to);
     });
 

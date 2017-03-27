@@ -1,46 +1,44 @@
 {
   "name": "px-datetime-range-field",
-  "version": "0.3.11",
+  "version": "0.5.11",
   "main": [
     "px-datetime-range-field.html"
   ],
   "ignore": [
     ".*",
-    "npm-debug.log",
-    "Gruntfile.js",
-    "sass",
-    "bower_components",
     "node_modules",
-    "test",
-    ".github",
+    "bower_components",
+    "sass",
+    "HISTORY.md",
+    "CONTRIBUTING.md",
     "OSS_Notice.pdf",
-    "px-datetime-range-field.png",
-    "scripts"
+    "scripts",
+    ".github",
+    ".editorconfig",
+    ".jshintrc",
+    ".gitignore",
+    "LICENSE.md",
+    "gulpfile.js",
+    "monogram-wdmk.png",
+    "README.md",
+    "wct.conf.json",
+    "px-datetime-range-field.png"
   ],
   "dependencies": {
-    "polymer": "^1.5.0",
-    "px-datetime-common": "~0.4.0",
-    "px-datetime-field": "~0.3.0",
-    "px-actionable-text-icons-design": "^0.0.3",
-    "px-toggle-design": "^0.2.12",
-    "px-forms-design": "^0.3.16",
-    "px-typography-design": "^0.3.5",
-    "px-headings-design": "^0.2.13",
-    "px-spacing-design": "~0.3.8",
-    "px-datetime-common": "~0.5.0",
-    "px-datetime-field": "~0.4.0",
+    "polymer": "^1.6.1",
+    "px-actionable-text-icons-design": "^1.1.0",
+    "px-toggle-design": "^1.1.0",
+    "px-forms-design": "^1.1.0",
+    "px-typography-design": "^1.2.0",
+    "px-headings-design": "^0.3.0",
+    "px-spacing-design": "^0.4.0",
+    "px-datetime-common": "^0.7.0",
+    "px-datetime-field": "^0.6.0",
+    "px-theme": "^2.0.3",
     "px-localize-behavior": "^0.0.3"
-
   },
   "devDependencies": {
-    "px-starter-kit-design": "#~0.5.4",
-    "px-forms-design": "#~0.3.15",
-    "px-tables-design": "#~0.3.12",
-    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#~1.2.3",
-    "px-polymer-font-awesome":"^0.1.8",
-    "px-tabs": "~0.4.0",
-    "px-api-viewer": "~0.0.3",
-    "px-demo-snippet": "~0.0.12",
-    "px-list-inline-design": "^0.2.11"
+    "px-starter-kit-design": "^0.7.0",
+    "px-demo": "^1.0.6"
   }
 }
