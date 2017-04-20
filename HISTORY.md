@@ -1,6 +1,6 @@
 v0.6.0
 ==================
-* added localization
+* added localization through resources, language, formats and Px.moment.changeLocale()
 
 v0.5.11
 ==================
