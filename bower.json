@@ -33,7 +33,7 @@
     "px-typography-design": "^1.2.0",
     "px-headings-design": "^0.3.0",
     "px-spacing-design": "^0.4.0",
-    "px-datetime-common": "^1.0.0",
+    "px-datetime-common": "^0.8.0",
     "px-datetime-field": "^0.7.0",
     "px-theme": "^2.0.3"
   },
