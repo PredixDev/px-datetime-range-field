@@ -20,10 +20,9 @@ The datetime components rely on <a href="https://momentjs.com/" target="_blank">
 #### Styling
 The following custom properties are available for styling. Please also refer to px-forms-design for additional style variables used by this component.
 
-Custom property | Description | Default
-----------------|-------------|----------
+Custom property | Description
+:----------------|:-------------
 `--px-datetime-range-field-to-color` | Text color of the "TO" between start and end date input fields | `$black`
-`--px-datetime-range-field-text-color-validation--failed` | Outline color for the field when validation fails | `$alert-red`
 
 @demo demo.html
 -->
@@ -34,8 +33,8 @@ Custom property | Description | Default
   <template>
     <style include="px-datetime-range-field-styles"></style>
 
-    <div class="form flex flex--middle flex--wrap">
-      <div id="fromFields" class="flex flex--middle u-mb">
+    <div class$="{{_getWrapClass(allowWrap)}} dt-position flex flex--top">
+      <div id="fromFields" class$="{{_getFromFieldClass(allowWrap)}}">
         <span class="a11y">[[localize('from')]]</span>
         <px-datetime-field
           id="fromDate"
@@ -46,16 +45,21 @@ Custom property | Description | Default
           time-zone="{{timeZone}}"
           hide-time="[[hideTime]]"
           hide-date="[[hideDate]]"
+          hide-icon="{{hideIcon}}"
           is-valid="{{_fromValid}}"
+          is-range-valid="[[_isRangeValid]]"
           block-future-dates="{{blockFutureDates}}"
           block-past-dates="{{blockPastDates}}"
           resources="[[resources]]"
           language="[[language]]"
           formats="[[formats]]">
         </px-datetime-field>
+        <template is="dom-if" if="{{!_isRangeValid}}">
+          <div class="form-field__help validation-error dt-validation-text">[[localize('from cannot be later than to date')]]</div>
+        </template>
       </div>
-      <span class="caps u-mh- u-mb to">[[localize('TO')]]</span>
-      <div id="toFields" class="flex flex--middle u-mb">
+      <span class="caps dt-to u-mh-">[[localize('TO')]]</span>
+      <div id="toFields" class$="{{_getToFieldClass(showButtons, allowWrap)}}">
         <px-datetime-field
           id="toDate"
           moment-obj="{{toMoment}}"
@@ -65,36 +69,21 @@ Custom property | Description | Default
           time-zone="{{timeZone}}"
           hide-time="[[hideTime]]"
           hide-date="[[hideDate]]"
+          hide-icon="{{hideIcon}}"
           is-valid="{{_toValid}}"
+          is-range-valid="[[_isRangeValid]]"
           block-future-dates="{{blockFutureDates}}"
           block-past-dates="{{blockPastDates}}"
           resources="[[resources]]"
           language="[[language]]"
           formats="[[formats]]">
         </px-datetime-field>
-        <template is="dom-if" if="{{!_isRangeValid}}">
-          <div class="fa fa-fw validation-container u-ml--">
-            <iron-icon
-              class$="{{_getValidationIconClass(_isRangeValid)}}"
-              icon="fa:fa-exclamation-circle">
-            </iron-icon>
-            <template is="dom-if" if="{{!_isRangeValid}}">
-              <px-tooltip
-                class="tooltip-font"
-                smart-orientation
-                orientation="top"
-                tooltip-message="[[localize('from can not be later than to')]]">
-              </px-tooltip>
-            </template>
-          </div>
-        </template>
       </div>
-
       <template is="dom-if" if="{{showButtons}}">
         <px-datetime-buttons
           id="dtBtns"
           is-submit-button-valid="[[isValid]]"
-          class="u-ml u-mb"
+          class="u-mb"
           resources="[[resources]]"
           language="[[language]]"
           formats="[[formats]]">
@@ -164,6 +153,13 @@ Custom property | Description | Default
         value: false
       },
       /**
+       * Controls whether the calendar/clock icons should be hidden
+       */
+      hideIcon: {
+        type: Boolean,
+        value: false
+      },
+      /**
        * Booleaning stating if the date, time, or range is valid.
        *
        */
@@ -174,7 +170,6 @@ Custom property | Description | Default
       },
       /**
        * used internally to determine if the range validation error should be displayed
-       *
        */
       _isRangeValid: {
         type: Boolean,
@@ -217,6 +212,13 @@ Custom property | Description | Default
             }
           };
         }
+      },
+      /**
+       * Allows the component to wrap the fields and buttons
+       */
+      allowWrap: {
+        type: Boolean,
+        value: false
       }
     },
     /**
@@ -259,6 +261,39 @@ Custom property | Description | Default
     /**
      *
      */
+    _getWrapClass: function(allowWrap) {
+      var classList= ""
+      if (allowWrap) {
+        classList += "flex--wrap"
+      }
+      return classList;
+    },
+    /**
+     *
+     */
+    _getFromFieldClass: function(allowWrap){
+      var classList= ""
+      if (allowWrap){
+        classList += "u-pb+"
+      }
+      return classList;
+    },
+    /**
+     *
+     */
+    _getToFieldClass: function(showButtons, allowWrap){
+      var classList= ""
+      if (showButtons){
+        classList += "u-mr- "
+      }
+      if (allowWrap && showButtons){
+        classList += "u-pb+"
+      }
+      return classList;
+    },
+    /**
+     *
+     */
     _getIsValid: function(_fromValid, _toValid, _isRangeValid) {
       if(_fromValid && _toValid && _isRangeValid){
         return true;
@@ -283,17 +318,17 @@ Custom property | Description | Default
      * helper function to decide which classes need to be plied to iron-icon element
      *
      */
-    _getValidationIconClass: function(_isRangeValid){
-      var classList= ['validation-container__icon'];
+    // _getValidationIconClass: function(_isRangeValid){
+    //   var classList= ['validation-container__icon'];
 
-      if(!_isRangeValid) {
-        classList.push('validation-container__icon--failed');
-      }
-      else {
-          classList.push('visuallyhidden');
-      }
-      return classList.join(' ');
-    },
+    //   if(!_isRangeValid) {
+    //     classList.push('validation-container__icon--failed');
+    //   }
+    //   else {
+    //       classList.push('visuallyhidden');
+    //   }
+    //   return classList.join(' ');
+    // },
     /**
      *
      */

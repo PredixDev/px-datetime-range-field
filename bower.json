@@ -27,18 +27,18 @@
   ],
   "dependencies": {
     "polymer": "^1.6.1",
-    "px-actionable-text-icons-design": "^1.1.0",
-    "px-toggle-design": "^1.1.0",
-    "px-forms-design": "^1.1.0",
-    "px-typography-design": "^1.2.0",
-    "px-headings-design": "^0.3.0",
-    "px-spacing-design": "^0.4.0",
-    "px-datetime-common": "^0.8.0",
-    "px-datetime-field": "^0.7.0",
-    "px-theme": "^2.0.3"
+    "px-datetime-common": "^1.0.0",
+    "px-datetime-field": "^1.0.0"
   },
   "devDependencies": {
-    "px-starter-kit-design": "^0.7.0",
-    "px-demo": "^1.0.6"
+    "px-theme": "^3.0.0",
+    "px-actionable-text-icons-design": "^2.0.0",
+    "px-toggle-design": "^2.0.0",
+    "px-forms-design": "^2.0.0",
+    "px-typography-design": "^2.0.0",
+    "px-headings-design": "^1.0.0",
+    "px-spacing-design": "^1.0.0",
+    "px-starter-kit-design": "^1.0.0",
+    "px-demo": "^2.0.0"
   }
 }
