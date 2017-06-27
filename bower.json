@@ -26,19 +26,19 @@
     "px-datetime-range-field.png"
   ],
   "dependencies": {
-    "polymer": "^1.6.1",
+    "polymer": "^1.9.0",
     "px-datetime-common": "^1.0.0",
     "px-datetime-field": "^1.0.0"
   },
   "devDependencies": {
     "px-theme": "^3.0.0",
-    "px-actionable-text-icons-design": "^2.0.0",
-    "px-toggle-design": "^2.0.0",
+    "px-normalize-design": "^1.0.0",
+    "px-box-sizing-design": "^1.0.0",
+    "px-flexbox-design": "^1.0.0",
+    "px-helpers-design": "^1.0.0",
     "px-forms-design": "^2.0.0",
     "px-typography-design": "^2.0.0",
-    "px-headings-design": "^1.0.0",
     "px-spacing-design": "^1.0.0",
-    "px-starter-kit-design": "^1.0.0",
     "px-demo": "^2.0.0"
   }
 }
