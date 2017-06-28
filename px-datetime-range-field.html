@@ -47,7 +47,7 @@ Custom property | Description
           hide-date="[[hideDate]]"
           hide-icon="{{hideIcon}}"
           is-valid="{{_fromValid}}"
-          is-range-valid="[[_isRangeValid]]"
+          show-validation-message="[[_showFromValidationMessage]]"
           block-future-dates="{{blockFutureDates}}"
           block-past-dates="{{blockPastDates}}"
           resources="[[resources]]"
@@ -71,7 +71,7 @@ Custom property | Description
           hide-date="[[hideDate]]"
           hide-icon="{{hideIcon}}"
           is-valid="{{_toValid}}"
-          is-range-valid="[[_isRangeValid]]"
+          show-validation-message="[[_showToValidationMessage]]"
           block-future-dates="{{blockFutureDates}}"
           block-past-dates="{{blockPastDates}}"
           resources="[[resources]]"
@@ -180,11 +180,25 @@ Custom property | Description
         value: true
       },
       /**
+       * Determines whether to display the from validation message
+       */
+      _showFromValidationMessage: {
+        type: Boolean,
+        value: true
+      },
+      /**
        * Reflects if the to field is valid
        */
       _toValid: {
         type: Boolean,
         value: false
+      },
+      /**
+       * Determines whether to display the from validation message
+       */
+      _showToValidationMessage: {
+        type: Boolean,
+        value: true
       },
       /**
        * Used to prevent this element from firing px-datetime-range-submitted
@@ -225,7 +239,8 @@ Custom property | Description
       'enter': '_onEnter'
     },
     observers: [
-      '_momentChanged(fromMoment, toMoment)'
+      '_momentChanged(fromMoment, toMoment)',
+      '_validationMessagePriority(_fromValid, _toValid, _isRangeValid)'
     ],
     /**
      * Sets up listeners for a variety of events fired from or passing through this component
@@ -296,7 +311,7 @@ Custom property | Description
       return false;
     },
     /**
-     * computer function nto determine if the range is valid
+     * computer function to determine if the range is valid
      */
     _getIsRangeValid: function(fromMoment, toMoment) {
       if (!this._validateRangeOrder()) {
@@ -307,6 +322,21 @@ Custom property | Description
         this.$.fromDate._forcedFailedClass = false;
         this.$.toDate._forcedFailedClass = false;
         return true;
+      }
+    },
+    /**
+     * Determines which validation message is displayed
+     * Show validation messages for range first, then from, and then to
+     */
+    _validationMessagePriority:function(_fromValid, _toValid, _isRangeValid){
+      if (!_isRangeValid){
+        this.set('_showFromValidationMessage', false);
+        this.set('_showToValidationMessage', false);
+      } else if (!_fromValid) {
+        this.set('_showFromValidationMessage', true);
+        this.set('_showToValidationMessage', false);
+      } else if (!_toValid) {
+        this.set('_showToValidationMessage', true);
       }
     },
     /**
