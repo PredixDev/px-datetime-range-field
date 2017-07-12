@@ -1,13 +1,10 @@
-Px-Datetime-Range-Field [![Build Status](https://travis-ci.org/PredixDev/px-datetime-range-field.svg?branch=master)](https://travis-ci.org/PredixDev/px-datetime-range-field)
------------------------------------------------
-
-[![px-datetime-range-field demo](px-datetime-range-field.png?raw=true)](https://predixdev.github.io/px-datetime-range-field)
+# px-datetime-range-field [![Build Status](https://travis-ci.org/PredixDev/px-datetime-range-field.svg?branch=master)](https://travis-ci.org/PredixDev/px-datetime-range-field)
 
 ## Overview
 
-Px-Datetime-Range-Field is a Predix Experience ('Px') component
+The px-datetime-range-field component allows the user to select a range of dates and/or times.
 
-## documentation
+## Documentation
 
 Read the full API and view the demo [here](https://predixdev.github.io/px-datetime-range-field).
 
