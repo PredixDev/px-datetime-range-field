@@ -272,33 +272,21 @@ Custom property | Description
      * helper fuction to style the outer div
      */
     _getWrapClass: function(allowWrap) {
-      var classList= ""
-      if (allowWrap) {
-        classList += "flex--wrap"
-      }
-      return classList;
+      return allowWrap ? "flex--wrap" : "";
     },
     /**
      * helper function to style #fromFields
      */
     _getFromFieldClass: function(allowWrap){
-      var classList= ""
-      if (allowWrap){
-        classList += "u-pb+"
-      }
-      return classList;
+      return allowWrap ? "u-pb+" : "";
     },
     /**
      * helper function to style #toFields
      */
     _getToFieldClass: function(showButtons, allowWrap){
-      var classList= ""
-      if (showButtons){
-        classList += "u-mr- "
-      }
-      if (allowWrap && showButtons){
-        classList += "u-pb+"
-      }
+      var classList= "";
+      classList += showButtons ? "u-mr- " : "";
+      classList += (allowWrap && showButtons) ? "u-pb+" : "";
       return classList;
     },
     /**
