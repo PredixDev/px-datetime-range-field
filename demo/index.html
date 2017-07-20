@@ -1,6 +1,5 @@
 <!-- Common imports -->
 <link rel="import" href="../../polymer/polymer.html" />
-<link rel="import" href="../../px-polymer-font-awesome/polymer-font-awesome.html" />
 
 <!-- Common demo imports -->
 <link rel="import" href="../../px-demo/px-demo-header.html" />
@@ -58,6 +57,8 @@
             block-past-dates="{{props.blockPastDates.value}}"
             hide-time="{{props.hideTime.value}}"
             hide-date="{{props.hideDate.value}}"
+            hide-icon="{{props.hideIcon.value}}"
+            allow-wrap="{{props.allowWrap.value}}"
             show-time-zone="{{props.showTimeZone.value}}"
             is-valid="{{props.isValid.value}}"
             time-zone="{{props.timeZone.value}}">
@@ -105,8 +106,8 @@
        */
       props: {
         type: Object,
-        value: function(){ 
-          var props =  this.demoProps; 
+        value: function(){
+          var props =  this.demoProps;
               props.timeZone.inputLocalCandidates = Px.moment.tz.names();
             return props;
           }
@@ -136,7 +137,9 @@
               blockFutureDates: true,
               hideTime: true,
               hideDate: false,
-              showTimeZone: "dropdown",
+              hideIcon: false,
+              allowWrap: true,
+              showTimeZone: "extendedDropdown",
               timeZone: "America/Los_Angeles"
             },
 
@@ -148,6 +151,8 @@
               blockFutureDates: false,
               hideTime: false,
               hideDate: true,
+              hideIcon: false,
+              allowWrap: false,
               showTimeZone: "text",
               timeZone: "UTC"
             }
@@ -173,9 +178,21 @@
         inputType: 'toggle'
       },
 
+      hideIcon: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
       showButtons: {
         type: Boolean,
         defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      allowWrap: {
+        type: Boolean,
+        defaultValue: true,
         inputType: 'toggle'
       },
 
@@ -230,7 +247,7 @@
     },
 
     ready: function () {
-      this.linksIncludes = ['px-datetime-common/px-polygit-imports-datetime.html','px-polymer-font-awesome/polymer-font-awesome.html'];
+      this.linksIncludes = ['px-datetime-common/px-polygit-imports-datetime.html'];
     }
 
   });

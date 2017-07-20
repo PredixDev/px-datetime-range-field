@@ -1,3 +1,11 @@
+v1.0.0
+==================
+* refreshed component
+* Updated documentation
+* combined -predix and -sketch sass files
+* added the option to have the fields wrap or not
+* added a hideIcon property
+
 v0.6.0
 ==================
 * added localization through resources, language, formats and Px.moment.changeLocale()
