@@ -2,7 +2,7 @@
 
 ## Overview
 
-The px-datetime-range-field component allows the user to select a range of dates and/or times.
+`Px-datetime-range-field` is a Predix UI component which allows the user to select two date/time values to create a date/time range.
 
 ## Documentation
 
