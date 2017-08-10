@@ -6,8 +6,7 @@
 <link rel="import" href="../px-datetime-common/px-datetime-buttons.html"/>
 <link rel="import" href="../px-datetime-field/px-datetime-field.html"/>
 <link rel="import" href="../px-datetime-common/validate.html"/>
-
-<!-- <script src="../moment/moment.js"></script> -->
+<link rel="import" href="css/px-datetime-range-field-styles.html"/>
 
 <!--
 The datetime components rely on <a href="https://momentjs.com/" target="_blank">Moment.js</a> and <a href="https://momentjs.com/timezone/" target="_blank">Moment Timezone</a>.
@@ -17,18 +16,19 @@ The datetime components rely on <a href="https://momentjs.com/" target="_blank">
     <px-datetime-range-field range="{{...}}">
     </px-datetime-range-field>
 
+
 ### Styling
+
 The following custom properties are available for styling. Please also refer to px-forms-design for additional style variables used by this component.
 
 Custom property | Description
 :----------------|:-------------
 `--px-datetime-range-field-to-color` | Text color of the "TO" between start and end date input fields
 
-@demo demo.html
+@element px-datetime-range-field
+@homepage index.html
+@demo index.html
 -->
-
-<link rel="import" href="css/px-datetime-range-field-styles.html">
-
 <dom-module id="px-datetime-range-field">
   <template>
     <style include="px-datetime-range-field-styles"></style>
