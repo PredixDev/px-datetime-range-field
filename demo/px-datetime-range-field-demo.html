@@ -61,7 +61,9 @@
             allow-wrap="{{props.allowWrap.value}}"
             show-time-zone="{{props.showTimeZone.value}}"
             is-valid="{{props.isValid.value}}"
-            time-zone="{{props.timeZone.value}}">
+            time-zone="{{props.timeZone.value}}"
+            min="{{props.min.value}}"
+            max="{{props.max.value}}">
         </px-datetime-range-field>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
@@ -239,9 +241,21 @@
       range: {
         type: Object,
         defaultValue: {
-          from : "2015-07-01T01:00:00.000Z",
-          to : "2016-07-08T14:00:00.000Z"
+          from : Px.moment().subtract(1, 'day').toISOString(),
+          to : Px.moment().add(1, 'day').toISOString()
         },
+        inputType: 'code:JSON'
+      },
+
+      min: {
+        type: Object,
+        defaultValue: Px.moment().subtract(7, 'day'),
+        inputType: 'code:JSON'
+      },
+
+      max: {
+        type: Object,
+        defaultValue: Px.moment().add(7, 'day'),
         inputType: 'code:JSON'
       }
     },

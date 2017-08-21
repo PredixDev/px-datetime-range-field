@@ -52,7 +52,9 @@ Custom property | Description
           block-past-dates="{{blockPastDates}}"
           resources="[[resources]]"
           language="[[language]]"
-          formats="[[formats]]">
+          formats="[[formats]]"
+          min="[[min]]"
+          max="[[max]]">
         </px-datetime-field>
         <template is="dom-if" if="{{!_isRangeValid}}">
           <div class="form-field__help validation-error dt-validation-text">[[localize('from cannot be later than to date')]]</div>
@@ -76,7 +78,9 @@ Custom property | Description
           block-past-dates="{{blockPastDates}}"
           resources="[[resources]]"
           language="[[language]]"
-          formats="[[formats]]">
+          formats="[[formats]]"
+          min="[[min]]"
+          max="[[max]]">
         </px-datetime-field>
       </div>
       <template is="dom-if" if="{{showButtons}}">
