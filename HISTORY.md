@@ -1,3 +1,7 @@
+v1.1.0
+==================
+* added `hideValidationMessages` property
+
 v1.0.4
 ==================
 * add min and max date support

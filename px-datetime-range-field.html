@@ -184,13 +184,6 @@ Custom property | Description
         value: true
       },
       /**
-       * Determines whether to display the from validation message
-       */
-      _showFromValidationMessage: {
-        type: Boolean,
-        value: true
-      },
-      /**
        * Reflects if the to field is valid
        */
       _toValid: {
@@ -198,11 +191,25 @@ Custom property | Description
         value: false
       },
       /**
-       * Determines whether to display the from validation message
+       * Used to determine which valdiation message to show when there are multple invalid fields.
+       */
+      _showFromValidationMessage: {
+        type: Boolean,
+        value: true
+      },
+      /**
+       * Used to determine which valdiation message to show when there are multple invalid fields.
        */
       _showToValidationMessage: {
         type: Boolean,
         value: true
+      },
+      /**
+       * Hides the validation messages if set to true
+       */
+      hideValidationMessages: {
+        type: Boolean,
+        value: false
       },
       /**
        * Used to prevent this element from firing px-datetime-range-submitted
@@ -244,7 +251,7 @@ Custom property | Description
     },
     observers: [
       '_momentChanged(fromMoment, toMoment)',
-      '_validationMessagePriority(_fromValid, _toValid, _isRangeValid)'
+      '_validationMessagePriority(_fromValid, _toValid, _isRangeValid, hideValidationMessages)'
     ],
     /**
      * Sets up listeners for a variety of events fired from or passing through this component
@@ -320,8 +327,8 @@ Custom property | Description
      * Determines which validation message is displayed
      * Show validation messages for range first, then from, and then to
      */
-    _validationMessagePriority:function(_fromValid, _toValid, _isRangeValid){
-      if (!_isRangeValid){
+    _validationMessagePriority:function(_fromValid, _toValid, _isRangeValid, hideValidationMessages){
+      if (!_isRangeValid || hideValidationMessages){
         this.set('_showFromValidationMessage', false);
         this.set('_showToValidationMessage', false);
       } else if (!_fromValid) {
