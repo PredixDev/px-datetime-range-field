@@ -18,7 +18,9 @@
 <!-- Demo DOM module -->
 <dom-module id="px-datetime-range-field-demo">
   <template>
-    <style include="px-demo-styles" is="custom-style"></style>
+    <custom-style>
+      <style include="px-demo-styles" is="custom-style"></style>
+    </custom-style>
 
     <!-- Header -->
     <px-demo-header
@@ -35,44 +37,45 @@
     <!-- Interactive -->
     <px-demo-interactive>
       <!-- Configs -->
-      <px-demo-configs configs="[[configs]]" props="{{props}}" chosen-config="{{consenConfig}}"></px-demo-configs>
+      <px-demo-configs slot="px-demo-configs" configs="[[configs]]" props="{{props}}" chosen-config="{{consenConfig}}"></px-demo-configs>
 
       <!-- Props -->
-      <px-demo-props props="{{props}}" config="[[chosenConfig]]"></px-demo-props>
+      <px-demo-props slot="px-demo-props" props="{{props}}" config="[[chosenConfig]]"></px-demo-props>
 
       <!-- Code Editor -->
-      <px-demo-code-editor props="{{props}}"></px-demo-code-editor>
+      <px-demo-code-editor slot="px-demo-code-editor" props="{{props}}"></px-demo-code-editor>
 
       <!-- Component ---------------------------------------------------------->
-      <px-demo-component>
+      <px-demo-component slot="px-demo-component">
         <p class=u-mb0>Event fired: <strong>px-datetime-range-submitted</strong></p>
         <p class="zeta u-mt0">See API Reference below for more details</p>
         <p class="u-mb++">Current range object: <strong>{{props.range.value.from}}</strong> To: <strong>{{props.range.value.to}}</strong></p>
 
         <px-datetime-range-field
-            range="{{props.range.value}}"
-            date-format="{{props.dateFormat.value}}"
-            time-format="{{props.timeFormat.value}}"
-            show-buttons="{{props.showButtons.value}}"
-            block-future-dates="{{props.blockFutureDates.value}}"
-            block-past-dates="{{props.blockPastDates.value}}"
-            hide-time="{{props.hideTime.value}}"
-            hide-date="{{props.hideDate.value}}"
-            hide-icon="{{props.hideIcon.value}}"
-            allow-wrap="{{props.allowWrap.value}}"
-            show-time-zone="{{props.showTimeZone.value}}"
-            is-valid="{{props.isValid.value}}"
-            time-zone="{{props.timeZone.value}}"
-            min="{{props.min.value}}"
-            max="{{props.max.value}}">
+          range="{{props.range.value}}"
+          date-format="{{props.dateFormat.value}}"
+          time-format="{{props.timeFormat.value}}"
+          show-buttons="{{props.showButtons.value}}"
+          block-future-dates="{{props.blockFutureDates.value}}"
+          block-past-dates="{{props.blockPastDates.value}}"
+          hide-time="{{props.hideTime.value}}"
+          hide-date="{{props.hideDate.value}}"
+          hide-icon="{{props.hideIcon.value}}"
+          allow-wrap="{{props.allowWrap.value}}"
+          show-time-zone="{{props.showTimeZone.value}}"
+          is-valid="{{props.isValid.value}}"
+          time-zone="{{props.timeZone.value}}"
+          min="{{props.min.value}}"
+          max="{{props.max.value}}">
         </px-datetime-range-field>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
 
       <px-demo-component-snippet
-          element-properties="{{props}}"
-          element-name="px-datetime-range-field"
-          links-includes="[[linksIncludes]]">
+        slot="px-demo-component-snippet"
+        element-properties="{{props}}"
+        element-name="px-datetime-range-field"
+        links-includes="[[linksIncludes]]">
       </px-demo-component-snippet>
     </px-demo-interactive>
 
