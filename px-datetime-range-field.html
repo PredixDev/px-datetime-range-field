@@ -249,7 +249,6 @@ Custom property | Description
       'enter': '_onEnter'
     },
     observers: [
-      '_rangeMomentChanged(fromMoment, toMoment)',
       '_validationMessagePriority(_fromValid, _toValid, _isRangeValid, hideValidationMessages)'
     ],
     /**
@@ -261,6 +260,7 @@ Custom property | Description
       this.listen(this.$.fromDate, 'px-next-field', '_focusFirstToEntry');
       this.listen(this.$.toDate, 'px-previous-field', '_focusLastFromEntry');
       this.listen(this, 'px-datetime-button-clicked', '_dateTimeButtons');
+      this.listen(this, 'px-moment-valid', '_rangeMomentChanged');
     },
     /*
      * Focuses select on the first entry of the 'to' field
@@ -341,12 +341,9 @@ Custom property | Description
      */
     _dateTimeButtons: function(evt) {
       if(!this.preventNotificationOnChange) {
-        //apply
         if (evt.detail.action) {
           this._applyChanges();
-        }
-        //cancel
-        else {
+        } else {
           this._cancelChanges();
         }
       }
@@ -370,7 +367,8 @@ Custom property | Description
     /**
      */
     _rangeMomentChanged: function(momentObj) {
-      if(!this.showButtons && this.isValid && !this.preventNotificationOnChange) {
+      if(!this.showButtons && !this.preventNotificationOnChange) {
+        this._applyChanges();
       }
     },
     /**
@@ -383,7 +381,7 @@ Custom property | Description
 
           vFromMoment = newFromMomentObj ? newFromMomentObj : this.fromMoment,
           vToMoment   = newToMomentObj ? newToMomentObj : this.toMoment;
-      this._isRangeValid = this._getIsRangeValid(vFromMoment, vToMoment);
+      this.set('_isRangeValid', this._getIsRangeValid(vFromMoment, vToMoment));
 
       if(this._isRangeValid){
         //don't set a moment obj if one would be undefined
