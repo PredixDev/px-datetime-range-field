@@ -47,6 +47,7 @@ Custom property | Description
           hide-icon="{{hideIcon}}"
           is-valid="{{_fromValid}}"
           show-validation-message="[[_showFromValidationMessage]]"
+          prevent-validation
           block-future-dates="{{blockFutureDates}}"
           block-past-dates="{{blockPastDates}}"
           resources="[[resources]]"
@@ -72,6 +73,7 @@ Custom property | Description
           hide-icon="{{hideIcon}}"
           is-valid="{{_toValid}}"
           show-validation-message="[[_showToValidationMessage]]"
+          prevent-validation
           block-future-dates="{{blockFutureDates}}"
           block-past-dates="{{blockPastDates}}"
           resources="[[resources]]"
@@ -171,8 +173,7 @@ Custom property | Description
        * used internally to determine if the range validation error should be displayed
        */
       _isRangeValid: {
-        type: Boolean,
-        computed: '_getIsRangeValid(fromMoment, toMoment)'
+        type: Boolean
       },
       /**
        * Reflects if the from field is valid
@@ -305,28 +306,26 @@ Custom property | Description
       return (_fromValid && _toValid && _isRangeValid);
     },
     /**
-     * computer function to determine if the range is valid
+     * function to determine if the range is valid
      */
     _getIsRangeValid: function(fromMoment, toMoment) {
-      if(fromMoment !== undefined || toMoment !== undefined){
-        if (!this._validateRangeOrder()) {
-          this.$.fromDate._forcedFailedClass = true;
-          this.$.toDate._forcedFailedClass = true;
-          return false;
-        }else{
-          this.$.fromDate._forcedFailedClass = false;
-          this.$.toDate._forcedFailedClass = false;
-          return true;
-        }
+      if (!this._validateRangeOrder(fromMoment, toMoment)) {
+        this.$.fromDate._forcedFailedClass = true;
+        this.$.toDate._forcedFailedClass = true;
+        return false;
+      }else{
+        this.$.fromDate._forcedFailedClass = false;
+        this.$.toDate._forcedFailedClass = false;
+        return true;
       }
     },
     /**
      * Determines which validation message is displayed
      * Show validation messages for range first, then from, and then to
      */
-    _validationMessagePriority:function(_fromValid, _toValid, _isRangeValid, hideValidationMessages){
-      if(_isRangeValid !== undefined){
-        if (!_isRangeValid || hideValidationMessages){
+    _validationMessagePriority: function (_fromValid, _toValid, _isRangeValid, hideValidationMessages) {
+      if (_isRangeValid !== undefined) {
+        if (!_isRangeValid || hideValidationMessages) {
           this.set('_showFromValidationMessage', false);
           this.set('_showToValidationMessage', false);
         } else if (!_fromValid) {
@@ -338,40 +337,87 @@ Custom property | Description
       }
     },
     /**
+     * Handle evt from a button being clicked
      */
     _dateTimeButtons: function(evt) {
       if(!this.preventNotificationOnChange) {
-        //if apply was clicked validate field
-        if(evt.detail.action){
-          var newMomentObj = this._validateField();
-          newMomentObj ? this.set('momentObj', newMomentObj) : '';
-        }else{
-          this.$$('#date').reset();
-          this.$$('#time').reset();
-          this._validateField();
+        //apply
+        if (evt.detail.action) {
+          this._applyChanges();
+        }
+        //cancel
+        else {
+          this._cancelChanges();
         }
       }
     },
     /**
+     * Handle escape key press
      */
-    _onEsc: function(evt) {
+    _onEsc: function() {
       if(!this.preventNotificationOnChange) {
-
+        this._cancelChanges();
       }
     },
     /**
+     * Handle enter key press
      */
-    _onEnter: function(evt) {
+    _onEnter: function() {
       if(!this.preventNotificationOnChange) {
-
+        this._applyChanges();
       }
     },
     /**
      */
     _rangeMomentChanged: function(momentObj) {
       if(!this.showButtons && this.isValid && !this.preventNotificationOnChange) {
-
       }
     },
+    /**
+     * Validate field and range
+     * If valid set the momentObj(s) that changed
+     */
+    _applyChanges: function () {
+      var newFromMomentObj = Polymer.dom(this.root).querySelector('#fromDate')._validateField(),
+          newToMomentObj =   Polymer.dom(this.root).querySelector('#toDate')._validateField(),
+
+          vFromMoment = newFromMomentObj ? newFromMomentObj : this.fromMoment,
+          vToMoment   = newToMomentObj ? newToMomentObj : this.toMoment;
+      this._isRangeValid = this._getIsRangeValid(vFromMoment, vToMoment);
+
+      if(this._isRangeValid){
+        //don't set a moment obj if one would be undefined
+        if ((newFromMomentObj && newToMomentObj) || (this.fromMoment !== undefined && this.toMoment !== undefined)) {
+          newFromMomentObj ? this.set('fromMoment', newFromMomentObj) : '';
+          newToMomentObj ? this.set('toMoment', newToMomentObj) : '';
+        }
+      }
+    },
+    /**
+     * Clear fields or reset to previous moment objs
+     */
+    _cancelChanges: function () {
+      var fromDate = Polymer.dom(this.root).querySelector('#fromDate');
+      var toDate = Polymer.dom(this.root).querySelector('#toDate');
+
+      if (this.fromMoment === undefined || this.toMoment === undefined) {
+        var fromEntries = Polymer.dom(fromDate.root).querySelectorAll('px-datetime-entry');
+        fromEntries.forEach(function (entry) {
+          entry.clear();
+        });
+        var toEntries = Polymer.dom(toDate.root).querySelectorAll('px-datetime-entry');
+        toEntries.forEach(function (entry) {
+          entry.clear();
+        });
+      }
+      else {
+        fromDate.$$('#date').reset();
+        fromDate.$$('#time').reset();
+        fromDate._validateField();
+        toDate.$$('#date').reset();
+        toDate.$$('#time').reset();
+        toDate._validateField();
+      }
+    }
   });
 </script>
