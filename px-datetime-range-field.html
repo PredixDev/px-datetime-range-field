@@ -5,7 +5,7 @@
 <link rel="import" href="../px-datetime-common/px-datetime-button-behavior.html"/>
 <link rel="import" href="../px-datetime-common/px-datetime-buttons.html"/>
 <link rel="import" href="../px-datetime-field/px-datetime-field.html"/>
-<link rel="import" href="../px-datetime-common/validate.html"/>
+<link rel="import" href="../px-datetime-common/px-datetime-validate.html"/>
 <link rel="import" href="css/px-datetime-range-field-styles.html"/>
 
 <!--
@@ -13,7 +13,7 @@ The datetime components rely on <a href="https://momentjs.com/" target="_blank">
 
 ### Usage
 
-    <px-datetime-range-field range="{{...}}">
+    <px-datetime-range-field from-moment="{{...}}" to-moment="{{...}}">
     </px-datetime-range-field>
 
 
@@ -39,7 +39,6 @@ Custom property | Description
         <px-datetime-field
           id="fromDate"
           moment-obj="{{fromMoment}}"
-          date-format="[[dateFormat]]"
           time-format="[[timeFormat]]"
           show-time-zone="[[showTimeZone]]"
           time-zone="{{timeZone}}"
@@ -65,7 +64,6 @@ Custom property | Description
         <px-datetime-field
           id="toDate"
           moment-obj="{{toMoment}}"
-          date-format="[[dateFormat]]"
           time-format="[[timeFormat]]"
           show-time-zone="[[showTimeZone]]"
           time-zone="{{timeZone}}"
@@ -250,7 +248,7 @@ Custom property | Description
       'enter': '_onEnter'
     },
     observers: [
-      '_momentChanged(fromMoment, toMoment)',
+      '_rangeMomentChanged(fromMoment, toMoment)',
       '_validationMessagePriority(_fromValid, _toValid, _isRangeValid, hideValidationMessages)'
     ],
     /**
@@ -304,23 +302,22 @@ Custom property | Description
      * computer function to determine if something is valid
      */
     _getIsValid: function(_fromValid, _toValid, _isRangeValid) {
-      if(_fromValid && _toValid && _isRangeValid){
-        return true;
-      }
-      return false;
+      return (_fromValid && _toValid && _isRangeValid);
     },
     /**
      * computer function to determine if the range is valid
      */
     _getIsRangeValid: function(fromMoment, toMoment) {
-      if (!this._validateRangeOrder()) {
-        this.$.fromDate._forcedFailedClass = true;
-        this.$.toDate._forcedFailedClass = true;
-        return false;
-      }else{
-        this.$.fromDate._forcedFailedClass = false;
-        this.$.toDate._forcedFailedClass = false;
-        return true;
+      if(fromMoment !== undefined || toMoment !== undefined){
+        if (!this._validateRangeOrder()) {
+          this.$.fromDate._forcedFailedClass = true;
+          this.$.toDate._forcedFailedClass = true;
+          return false;
+        }else{
+          this.$.fromDate._forcedFailedClass = false;
+          this.$.toDate._forcedFailedClass = false;
+          return true;
+        }
       }
     },
     /**
@@ -328,42 +325,52 @@ Custom property | Description
      * Show validation messages for range first, then from, and then to
      */
     _validationMessagePriority:function(_fromValid, _toValid, _isRangeValid, hideValidationMessages){
-      if (!_isRangeValid || hideValidationMessages){
-        this.set('_showFromValidationMessage', false);
-        this.set('_showToValidationMessage', false);
-      } else if (!_fromValid) {
-        this.set('_showFromValidationMessage', true);
-        this.set('_showToValidationMessage', false);
-      } else if (!_toValid) {
-        this.set('_showToValidationMessage', true);
+      if(_isRangeValid !== undefined){
+        if (!_isRangeValid || hideValidationMessages){
+          this.set('_showFromValidationMessage', false);
+          this.set('_showToValidationMessage', false);
+        } else if (!_fromValid) {
+          this.set('_showFromValidationMessage', true);
+          this.set('_showToValidationMessage', false);
+        } else if (!_toValid) {
+          this.set('_showToValidationMessage', true);
+        }
       }
     },
     /**
      */
     _dateTimeButtons: function(evt) {
       if(!this.preventNotificationOnChange) {
-        this._applyCurrentValues(evt.detail.action);
+        //if apply was clicked validate field
+        if(evt.detail.action){
+          var newMomentObj = this._validateField();
+          newMomentObj ? this.set('momentObj', newMomentObj) : '';
+        }else{
+          this.$$('#date').reset();
+          this.$$('#time').reset();
+          this._validateField();
+        }
       }
     },
     /**
      */
     _onEsc: function(evt) {
-      if(!this.preventNotificationOnChange && this.showButtons) {
-        this._applyCurrentValues(false);
+      if(!this.preventNotificationOnChange) {
+
       }
     },
     /**
      */
     _onEnter: function(evt) {
-      if(!this.preventNotificationOnChange && this.showButtons) {
-        this._applyCurrentValues(true);
+      if(!this.preventNotificationOnChange) {
+
       }
     },
     /**
      */
-    _momentChanged: function(momentObj) {
+    _rangeMomentChanged: function(momentObj) {
       if(!this.showButtons && this.isValid && !this.preventNotificationOnChange) {
-        this._applyCurrentValues(true);
+
       }
     },
   });

@@ -5,11 +5,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Predix UI</title>
-  <script src="../../webcomponentsjs/webcomponents.min.js"></script>
-  <link rel="import" href="../../polymer/polymer.html" />
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
+  <link rel="import" href="../../polymer/polymer.html" />
   <link rel="import" href="../../px-theme/px-theme-styles.html">
-  <style include="px-theme-styles" is="custom-style"></style>
 
   <link rel="import" href="../px-datetime-range-field.html" />
   <style>
@@ -17,6 +16,9 @@
       margin-top: 40px;
     }
   </style>
+  <custom-style>
+    <style include="px-theme-styles" is="custom-style"></style>
+  </custom-style>
 </head>
 <body>
   <px-datetime-range-field
@@ -25,8 +27,8 @@
     time-format="HH:mm"
     time-zone="UTC"
     show-time-zone="dropdown"
+    block-future-dates
     show-buttons
-    range='{"from":"2015-07-01T01:00:00.000Z","to":"2016-07-08T14:00:00.000Z"}'
     allow-wrap>
   </px-datetime-range-field>
 </body>
