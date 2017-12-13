@@ -1,4 +1,5 @@
 // suite('Navigation', function() {
+
 //   let range, fireKeyboardEvent;
 
 //   setup(function(done) {
@@ -105,7 +106,9 @@ suite('submit without buttons', function() {
       fromEntries = Polymer.dom(fields[0].root).querySelectorAll('px-datetime-entry'),
       fromTimeCells = Polymer.dom(fromEntries[1].root).querySelectorAll('px-datetime-entry-cell');
       fireKeyboardEvent(fromTimeCells[fromTimeCells.length - 1], 'ArrowRight');
-      done();
+      setTimeout(function() {
+        done();
+      }, 50);
     });
   });
 
@@ -171,8 +174,6 @@ suite('submit without buttons', function() {
 
 //   setup(function(done) {
 //     range = fixture('range');
-//     range.fromMoment = Px.moment().subtract(7, 'day');
-//     range.toMoment = Px.moment();
 //     range.showButtons = true;
 //     fireKeyboardEvent = function(elem, key){
 //       var evt = new CustomEvent('keydown',{detail:{'key':key,'keyIdentifier':key}});
@@ -223,8 +224,8 @@ suite('submit without buttons', function() {
 //   });
 
 //   test('event is fired when clicking apply', function() {
-//     var datetimeButtons = Polymer.dom(range.root).querySelectorAll('px-datetime-buttons'),
-//         buttons = Polymer.dom(datetimeButtons).node[0].querySelectorAll('button'),//??,
+//     var datetimeButtons = Polymer.dom(range.root).querySelector('px-datetime-buttons'),
+//         buttons = Polymer.dom(datetimeButtons.root).querySelectorAll('button'),
 //         i = 0;
 
 //     var listener = function(evt) {
@@ -242,51 +243,64 @@ suite('submit without buttons', function() {
 //     range.removeEventListener('px-datetime-submitted', listener);
 //   });
 
-//   test('moment is rolledback when clicking cancel', function() {
-//     var datetimeButtons = Polymer.dom(range.root).querySelectorAll('px-datetime-buttons'),
-//         buttons = Polymer.dom(datetimeButtons).node[0].querySelectorAll('button'),//??,
+//   test('moment is rolledback when clicking cancel', function(done) {
+//     var datetimeButtons = Polymer.dom(range.root).querySelector('px-datetime-buttons'),
+//         buttons = Polymer.dom(datetimeButtons.root).querySelectorAll('button'),
 //         prevFromMoment = range.fromMoment.clone(),
 //         i = 0;
+
+//     debugger
 
 //     //do a change
 //     range.fromMoment = range.fromMoment.clone().subtract(1, 'month');
 
-//     assert.notEqual(range.fromMoment.toISOString(), prevFromMoment.toISOString());
+//     //do a change
+//     range.fromMoment = range.fromMoment.clone().subtract(1, 'month');
 
 //     buttons[0].click();
+//     flush(function() {
+//       assert.equal(range.fromMoment.toISOString(), prevFromMoment.toISOString());
+//       done();
+//     });
 
-//     assert.equal(range.fromMoment.toISOString(), prevFromMoment.toISOString());
 //   });
 
-//   test('moment is rolledback when pressing esc', function() {
-//     var datetimeButtons = Polymer.dom(range.root).querySelectorAll('px-datetime-buttons'),
-//         buttons = Polymer.dom(datetimeButtons).node[0].querySelectorAll('button'),//??,
+//   test('moment is rolledback when pressing esc', function(done) {
+//     var datetimeButtons = Polymer.dom(range.root).querySelector('px-datetime-buttons'),
+//         buttons = Polymer.dom(datetimeButtons.root).querySelectorAll('button'),
 //         prevFromMoment = range.fromMoment.clone();
 //     //do a change
 //     range.fromMoment = range.fromMoment.clone().subtract(1, 'month');
 
-//     assert.notEqual(range.fromMoment.toISOString(), prevFromMoment.toISOString());
+//     assert.equal(range.fromMoment.toISOString(), prevFromMoment.toISOString());
 
 //     fireKeyboardEvent(range, 'Esc');
+//     flush(function() {
+//       assert.equal(range.fromMoment.toISOString(), prevFromMoment.toISOString());
+//       done();
+//     });
 
-//     assert.equal(range.fromMoment.toISOString(), prevFromMoment.toISOString());
 //   });
-
 // });
 
 
 // suite('validation', function() {
 
+//   let range, fireKeyboardEvent;
+
+//   setup(function() {
+//     range = fixture('range');
+//     fireKeyboardEvent = function(elem, key){
+//       var evt = new CustomEvent('keydown',{detail:{'key':key,'keyIdentifier':key}});
+//        elem.dispatchEvent(evt);
+//     };
+//   });
+
 //   test('range wont allow range to be reversed', function(){
-//     var range = fixture('range'),
-//         fields = Polymer.dom(range.root).querySelectorAll('px-datetime-field'),
+//     var fields = Polymer.dom(range.root).querySelectorAll('px-datetime-field'),
 //         toEntries = Polymer.dom(fields[1].root).querySelectorAll('px-datetime-entry'),
 //         todateCells = Polymer.dom(toEntries[0].root).querySelectorAll('px-datetime-entry-cell'),
-//         i=0,
-//         fireKeyboardEvent = function(elem, key){
-//           var evt = new CustomEvent('keydown',{detail:{'key':key,'keyIdentifier':key}});
-//            elem.dispatchEvent(evt);
-//         };
+//         i=0;
 
 //     var listener = function(evt) {
 //       i++;

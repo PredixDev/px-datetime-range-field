@@ -6,10 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Predix UI</title>
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-
   <link rel="import" href="../../polymer/polymer.html" />
   <link rel="import" href="../../px-theme/px-theme-styles.html">
-
   <link rel="import" href="../px-datetime-range-field.html" />
   <style>
     .demo{
@@ -25,13 +23,14 @@
     <template is="dom-bind">
       <px-datetime-range-field
         class="demo"
-        date-format="YY/MM/DD"
+        date-format="YYYY/MM/DD"
         time-format="hh:mm a"
         show-time-zone="text"
-        block-future-dates
         from-moment="{{fromMoment}}"
         to-moment="{{toMoment}}"
-        allow-wrap>
+        allow-wrap
+        required
+        show-buttons>
       </px-datetime-range-field>
     </template>
   </dom-bind>
