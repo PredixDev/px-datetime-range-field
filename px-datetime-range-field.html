@@ -183,7 +183,8 @@ Custom property | Description
        * used internally to determine if the range validation error should be displayed
        */
       _isRangeValid: {
-        type: Boolean
+        type: Boolean,
+        value: true
       },
       /**
        * Reflects if the from field is valid
@@ -270,8 +271,7 @@ Custom property | Description
     },
     observers: [
       '_validationMessagePriority(_fromValid, _toValid, _isRangeValid, hideValidationMessages)',
-      '_applyTemps(fromMoment, toMoment)',
-      '_applyChanges(_tempFromMomentObj, _tempToMomentObj)'
+      '_applyTemps(fromMoment, toMoment)'
     ],
     listeners: {
       'px-datetime-button-clicked': '_dateTimeButtons',
@@ -370,7 +370,7 @@ Custom property | Description
     _dateTimeButtons: function(evt) {
       if(!this.preventNotificationOnChange) {
         if (evt.detail.action) {
-          this._applyChanges();
+          this._applyChanges('buttons');
         } else {
           this._cancelChanges();
         }
@@ -388,9 +388,9 @@ Custom property | Description
      * Handle enter key press
      */
     _onEnter: function() {
-      // if(!this.preventNotificationOnChange) {
-      //   this._applyChanges();
-      // }
+      if(!this.preventNotificationOnChange) {
+        this._applyChanges('buttons');
+      }
     },
     /**
      */
@@ -402,9 +402,11 @@ Custom property | Description
         var newFromMomentObj = evt.detail.momentObj;
         if(typeof newFromMomentObj === 'object') {
           this.set('_tempFromMomentObj', newFromMomentObj);
+          this._applyChanges();
         }
         else if(newFromMomentObj === 'FieldBlank' || newFromMomentObj === 'FieldSame') {
           this.set('_tempFromMomentObj', undefined);
+          this._applyChanges();
         }
       }
     },
@@ -418,26 +420,30 @@ Custom property | Description
         var newToMomentObj = evt.detail.momentObj;
         if(typeof newToMomentObj === 'object') {
           this.set('_tempToMomentObj', newToMomentObj);
+          this._applyChanges();
         }
         else if(newToMomentObj === 'FieldBlank' || newToMomentObj === 'FieldSame') {
           this.set('_tempToMomentObj', undefined);
+          this._applyChanges();
         }
       }
     },
     _applyTemps: function() {
       if(this.fromMoment) {
         this.set('_tempFromMomentObj', this.fromMoment);
+        this._applyChanges();
       }
       if(this.toMoment) {
         this.set('_tempToMomentObj', this.toMoment);
+        this._applyChanges();
       }
     },
     /**
      * Validate field and range
      * If valid set the momentObj(s) that changed
      */
-    _applyChanges: function () {
-
+    _applyChanges: function (origin) {
+      if(origin !== 'buttons' && this.showButtons) return;
       // Both fields are empty, but the field is not required
       if(!this._tempFromMomentObj && !this._tempToMomentObj && !this.required) {
         this.set('fromMoment', undefined);
@@ -449,18 +455,6 @@ Custom property | Description
       }
       // Both fields are populated
       else if(this._tempFromMomentObj && this._tempToMomentObj) {
-        // // Both fields are the same as they were before (this happens on load), so do nothing
-        // if(newFromMomentObj === 'FieldSame' && newToMomentObj === 'FieldSame'){
-        //   return;
-        // }
-        // // The from field has not changed, use the existing value
-        // if(newFromMomentObj === 'FieldSame'){
-        //   newFromMomentObj = this.fromMoment;
-        // }
-        // // The to field has not changed, use the existing value
-        // if(newToMomentObj === 'FieldSame'){
-        //   newToMomentObj = this.toMoment;
-        // }
         // Figure out whether from is before to and set the new moment objects accordingly
         this.set('_isRangeValid', this._getIsRangeValid(this._tempFromMomentObj, this._tempToMomentObj));
         if(this._isRangeValid) {
