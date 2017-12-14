@@ -39,6 +39,7 @@ Custom property | Description
         <px-datetime-field
           id="fromDate"
           moment-obj="{{fromMoment}}"
+          date-format="[[dateFormat]]"
           time-format="[[timeFormat]]"
           show-time-zone="[[showTimeZone]]"
           time-zone="{{timeZone}}"
@@ -66,6 +67,7 @@ Custom property | Description
         <px-datetime-field
           id="toDate"
           moment-obj="{{toMoment}}"
+          date-format="[[dateFormat]]"
           time-format="[[timeFormat]]"
           show-time-zone="[[showTimeZone]]"
           time-zone="{{timeZone}}"
@@ -393,9 +395,6 @@ Custom property | Description
     /**
      */
     _handleFromValid: function(evt) {
-      // if(!this.showButtons && !this.preventNotificationOnChange) {
-      //   this._applyChanges(evt);
-      // }
       if(evt.detail && evt.detail.momentObj) {
         var newFromMomentObj = evt.detail.momentObj;
         if(typeof newFromMomentObj === 'object') {
@@ -411,9 +410,6 @@ Custom property | Description
     /**
      */
     _handleToValid: function(evt) {
-      // if(!this.showButtons && !this.preventNotificationOnChange) {
-      //   this._applyChanges(evt);
-      // }
       if(evt.detail && evt.detail.momentObj) {
         var newToMomentObj = evt.detail.momentObj;
         if(typeof newToMomentObj === 'object') {
@@ -426,6 +422,11 @@ Custom property | Description
         }
       }
     },
+    /**
+     * Observer to make sure that fromMoment and toMoment are
+     * copied to their internal copies if they're passed in or
+     * set programmatically.
+     */
     _applyTemps: function() {
       if(this.fromMoment) {
         this.set('_tempFromMomentObj', this.fromMoment);
@@ -437,19 +438,21 @@ Custom property | Description
       }
     },
     /**
-     * Validate field and range
-     * If valid set the momentObj(s) that changed
+     * Validates that range is in correct order.
+     * If valid, set the momentObjs from temp.
      */
     _applyChanges: function (origin) {
       if(origin !== 'buttons' && this.showButtons) return;
-      // Both fields are empty, but the field is not required
-      if(!this._tempFromMomentObj && !this._tempToMomentObj && !this.required) {
-        this.set('fromMoment', undefined);
-        this.set('toMoment', undefined);
-        this.set('_isRangeValid', true);
-      }
-      else if(this._tempFromMomentObj && !this._tempToMomentObj) {
-
+      // Both fields are empty
+      if(!this._tempFromMomentObj && !this._tempToMomentObj) {
+        if(this.required) {
+          this.isValid = false;
+        }
+        else {
+          this.set('fromMoment', undefined);
+          this.set('toMoment', undefined);
+          this.set('_isRangeValid', true);
+        }
       }
       // Both fields are populated
       else if(this._tempFromMomentObj && this._tempToMomentObj) {
@@ -467,27 +470,8 @@ Custom property | Description
      * Clear fields or reset to previous moment objs
      */
     _cancelChanges: function () {
-      var fromDate = Polymer.dom(this.root).querySelector('#fromDate');
-      var toDate = Polymer.dom(this.root).querySelector('#toDate');
-
-      if (this.fromMoment === undefined || this.toMoment === undefined) {
-        var fromEntries = Polymer.dom(fromDate.root).querySelectorAll('px-datetime-entry');
-        fromEntries.forEach(function (entry) {
-          entry.clear();
-        });
-        var toEntries = Polymer.dom(toDate.root).querySelectorAll('px-datetime-entry');
-        toEntries.forEach(function (entry) {
-          entry.clear();
-        });
-      }
-      else {
-        fromDate.$$('#date').reset();
-        fromDate.$$('#time').reset();
-        fromDate._validateField();
-        toDate.$$('#date').reset();
-        toDate.$$('#time').reset();
-        toDate._validateField();
-      }
+      this.$.fromDate._cancelChanges();
+      this.$.toDate._cancelChanges();
     }
   });
 </script>
