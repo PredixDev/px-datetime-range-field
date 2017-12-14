@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "elements": [
     {
-      "description": "The datetime components rely on <a href=\"https://momentjs.com/\" target=\"_blank\">Moment.js</a> and <a href=\"https://momentjs.com/timezone/\" target=\"_blank\">Moment Timezone</a>.\n\n### Usage\n\n    <px-datetime-range-field range=\"{{...}}\">\n    </px-datetime-range-field>\n\n\n### Styling\n\nThe following custom properties are available for styling. Please also refer to px-forms-design for additional style variables used by this component.\n\nCustom property | Description\n:----------------|:-------------\n`--px-datetime-range-field-to-color` | Text color of the \"TO\" between start and end date input fields",
+      "description": "The datetime components rely on <a href=\"https://momentjs.com/\" target=\"_blank\">Moment.js</a> and <a href=\"https://momentjs.com/timezone/\" target=\"_blank\">Moment Timezone</a>.\n\n### Usage\n\n    <px-datetime-range-field from-moment=\"{{...}}\" to-moment=\"{{...}}\">\n    </px-datetime-range-field>\n\n\n### Styling\n\nThe following custom properties are available for styling. Please also refer to px-forms-design for additional style variables used by this component.\n\nCustom property | Description\n:----------------|:-------------\n`--px-datetime-range-field-to-color` | Text color of the \"TO\" between start and end date input fields",
       "summary": "",
       "path": "px-datetime-range-field.html",
       "properties": [
@@ -74,62 +74,17 @@
           "inheritedFrom": "pxDatetimeRangeBehavior"
         },
         {
-          "name": "range",
-          "type": "Object",
-          "description": "(required: 'px-{datetime}-range-{picker}')\n\nThis is the object you use to instantiate px-datetime components. You can retrieve the object through 2-way data-binding.\n\nFormated as ISO8601 strings\n```\n{\n   \"from\": \"2013-01-07T22:44:30.652Z\",\n   \"to\" : \"2013-02-04T22:44:30.652Z\"\n}\n```\n\nThis object which will be changed when the user Submits their new selected range.",
-          "privacy": "public",
-          "sourceRange": {
-            "file": "bower_components/px-datetime-common/px-datetime-range-behavior.html",
-            "start": {
-              "line": 89,
-              "column": 4
-            },
-            "end": {
-              "line": 98,
-              "column": 5
-            }
-          },
-          "metadata": {
-            "polymer": {
-              "notify": true
-            }
-          },
-          "inheritedFrom": "pxDatetimeRangeBehavior"
-        },
-        {
-          "name": "_preventRangeUpdate",
-          "type": "boolean",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "bower_components/px-datetime-common/px-datetime-range-behavior.html",
-            "start": {
-              "line": 101,
-              "column": 4
-            },
-            "end": {
-              "line": 104,
-              "column": 5
-            }
-          },
-          "metadata": {
-            "polymer": {}
-          },
-          "defaultValue": "false",
-          "inheritedFrom": "pxDatetimeRangeBehavior"
-        },
-        {
           "name": "dateFormat",
           "type": "string",
           "description": "Moment format string for the DATE format to display/validate this field against\n(see http://momentjs.com/docs/#/parsing/string-format/)",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 116,
+              "line": 118,
               "column": 6
             },
             "end": {
-              "line": 119,
+              "line": 121,
               "column": 7
             }
           },
@@ -145,11 +100,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 125,
+              "line": 127,
               "column": 6
             },
             "end": {
-              "line": 128,
+              "line": 130,
               "column": 7
             }
           },
@@ -161,15 +116,15 @@
         {
           "name": "showTimeZone",
           "type": "string",
-          "description": "Can be set to show the timezone. Can have 2 values:\n - 'dropdown': shows the time zone as a dropdown which the user can use to select a different time zone. Only contains a subset of all timezones\n - 'extendedDropdown': shows the time zone as a dropdown which the user can use toselect a different time zone. Contains all existing timezones (588)\n - 'text': shows the time zone as text, non editable\n - 'abbreviatedText': shows the time zone as an abbreviated text, non editable (such as PST, EST...)",
+          "description": "Can be set to show the timezone. Can have 4 possible values:\n - 'dropdown': Shows the time zone as a dropdown which the user can use to select a different time zone. Only contains a subset of all time zones.\n - 'extendedDropdown': Shows the time zone as a dropdown which the user can use to select a different time zone. Contains all existing time zones (588) from the IANA tz database.\n - 'text': Shows the time zone as non-editable text.\n - 'abbreviatedText': Shows the abbreviated time zone as non editable text (such as PST, EST, etc). Note: many time zones do not have an abbreviation.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 137,
+              "line": 139,
               "column": 6
             },
             "end": {
-              "line": 140,
+              "line": 142,
               "column": 7
             }
           },
@@ -181,15 +136,15 @@
         {
           "name": "hideTime",
           "type": "boolean",
-          "description": "Controls whether time is displayed in this field",
+          "description": "Controls whether time should be hidden in this field.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 144,
+              "line": 146,
               "column": 6
             },
             "end": {
-              "line": 147,
+              "line": 149,
               "column": 7
             }
           },
@@ -201,15 +156,15 @@
         {
           "name": "hideDate",
           "type": "boolean",
-          "description": "Controls whether date should be hidden in this field. Typically used\nin combination with hideTime to make the field showing only the time",
+          "description": "Controls whether date should be hidden in this field.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 152,
+              "line": 153,
               "column": 6
             },
             "end": {
-              "line": 155,
+              "line": 156,
               "column": 7
             }
           },
@@ -221,15 +176,15 @@
         {
           "name": "hideIcon",
           "type": "boolean",
-          "description": "Controls whether the calendar/clock icons should be hidden",
+          "description": "Controls whether the calendar/clock icons should be hidden.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 159,
+              "line": 160,
               "column": 6
             },
             "end": {
-              "line": 162,
+              "line": 163,
               "column": 7
             }
           },
@@ -241,15 +196,15 @@
         {
           "name": "isValid",
           "type": "boolean",
-          "description": "Booleaning stating if the date, time, or range is valid.",
+          "description": "Boolean stating if the date, time, or range is valid.",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 166,
+              "line": 167,
               "column": 6
             },
             "end": {
-              "line": 170,
+              "line": 171,
               "column": 7
             }
           },
@@ -261,58 +216,17 @@
           }
         },
         {
-          "name": "_isRangeValid",
+          "name": "required",
           "type": "boolean",
-          "description": "used internally to determine if the range validation error should be displayed",
-          "privacy": "protected",
+          "description": "Boolean stating if the range field is required.\nWill result in an error if left blank.",
+          "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 174,
+              "line": 176,
               "column": 6
             },
             "end": {
-              "line": 177,
-              "column": 7
-            }
-          },
-          "metadata": {
-            "polymer": {
-              "readOnly": true
-            }
-          }
-        },
-        {
-          "name": "_fromValid",
-          "type": "boolean",
-          "description": "Reflects if the from field is valid",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 181,
-              "column": 6
-            },
-            "end": {
-              "line": 184,
-              "column": 7
-            }
-          },
-          "metadata": {
-            "polymer": {}
-          },
-          "defaultValue": "true"
-        },
-        {
-          "name": "_toValid",
-          "type": "boolean",
-          "description": "Reflects if the to field is valid",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 188,
-              "column": 6
-            },
-            "end": {
-              "line": 191,
+              "line": 179,
               "column": 7
             }
           },
@@ -322,17 +236,17 @@
           "defaultValue": "false"
         },
         {
-          "name": "_showFromValidationMessage",
+          "name": "_isRangeValid",
           "type": "boolean",
-          "description": "Used to determine which valdiation message to show when there are multple invalid fields.",
+          "description": "Used internally to determine if the range validation error should be displayed.",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 195,
+              "line": 183,
               "column": 6
             },
             "end": {
-              "line": 198,
+              "line": 186,
               "column": 7
             }
           },
@@ -342,9 +256,47 @@
           "defaultValue": "true"
         },
         {
-          "name": "_showToValidationMessage",
+          "name": "_fromValid",
           "type": "boolean",
-          "description": "Used to determine which valdiation message to show when there are multple invalid fields.",
+          "description": "Reflects if the 'from' field is valid",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 190,
+              "column": 6
+            },
+            "end": {
+              "line": 192,
+              "column": 7
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "_toValid",
+          "type": "boolean",
+          "description": "Reflects if the 'to' field is valid",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 196,
+              "column": 6
+            },
+            "end": {
+              "line": 198,
+              "column": 7
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "_showFromValidationMessage",
+          "type": "boolean",
+          "description": "Used to determine which validation message to show when there are multiple invalid fields.",
           "privacy": "protected",
           "sourceRange": {
             "start": {
@@ -359,13 +311,13 @@
           "metadata": {
             "polymer": {}
           },
-          "defaultValue": "true"
+          "defaultValue": "false"
         },
         {
-          "name": "hideValidationMessages",
+          "name": "_showToValidationMessage",
           "type": "boolean",
-          "description": "Hides the validation messages if set to true",
-          "privacy": "public",
+          "description": "Used to determine which validation message to show when there are multiple invalid fields.",
+          "privacy": "protected",
           "sourceRange": {
             "start": {
               "line": 209,
@@ -382,17 +334,37 @@
           "defaultValue": "false"
         },
         {
-          "name": "preventNotificationOnChange",
+          "name": "hideValidationMessages",
           "type": "boolean",
-          "description": "Used to prevent this element from firing px-datetime-range-submitted\nevent and prevent changes to range",
+          "description": "Hides the validation messages if set to 'true'",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 217,
+              "line": 216,
               "column": 6
             },
             "end": {
-              "line": 220,
+              "line": 219,
+              "column": 7
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "preventNotificationOnChange",
+          "type": "boolean",
+          "description": "Used to prevent this element from firing px-datetime-range-submitted event.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 223,
+              "column": 6
+            },
+            "end": {
+              "line": 226,
               "column": 7
             }
           },
@@ -408,11 +380,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 224,
+              "line": 230,
               "column": 6
             },
             "end": {
-              "line": 227,
+              "line": 233,
               "column": 7
             }
           },
@@ -422,17 +394,55 @@
           "defaultValue": "false"
         },
         {
+          "name": "_tempFromMomentObj",
+          "type": "Object",
+          "description": "Temporary moment object used for validation prior to applying as a new value for fromMoment.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 237,
+              "column": 6
+            },
+            "end": {
+              "line": 239,
+              "column": 7
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "_tempToMomentObj",
+          "type": "Object",
+          "description": "Temporary moment object used for validation prior to applying as a new value for toMoment.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 243,
+              "column": 7
+            },
+            "end": {
+              "line": 245,
+              "column": 7
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
           "name": "resources",
           "type": "Object",
           "description": "List of key/values to be included for translating this component",
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 231,
+              "line": 249,
               "column": 6
             },
             "end": {
-              "line": 242,
+              "line": 260,
               "column": 7
             }
           },
@@ -448,11 +458,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 247,
+              "line": 265,
               "column": 4
             },
             "end": {
-              "line": 250,
+              "line": 268,
               "column": 5
             }
           },
@@ -463,112 +473,17 @@
       ],
       "methods": [
         {
-          "name": "_setRange",
-          "description": "for legacy purposes",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "bower_components/px-datetime-common/px-datetime-range-behavior.html",
-            "start": {
-              "line": 114,
-              "column": 2
-            },
-            "end": {
-              "line": 118,
-              "column": 3
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "inheritedFrom": "pxDatetimeRangeBehavior"
-        },
-        {
           "name": "_localeChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "file": "bower_components/px-datetime-common/px-datetime-range-behavior.html",
             "start": {
-              "line": 121,
+              "line": 79,
               "column": 2
             },
             "end": {
-              "line": 131,
-              "column": 3
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "inheritedFrom": "pxDatetimeRangeBehavior"
-        },
-        {
-          "name": "_setMomentFromRange",
-          "description": "Converts range into from and to moments\n\nTriggered from a click on cancel, submit, esc, or enter",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "bower_components/px-datetime-common/px-datetime-range-behavior.html",
-            "start": {
-              "line": 137,
-              "column": 2
-            },
-            "end": {
-              "line": 145,
-              "column": 3
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "inheritedFrom": "pxDatetimeRangeBehavior"
-        },
-        {
-          "name": "_setRangeFromMoment",
-          "description": "Converts 'toMoment' and 'fromMoment' to ISO8601 strings, then set the range with the strings.\n\nTriggered from a click on cancel, submit, esc, or enter",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "bower_components/px-datetime-common/px-datetime-range-behavior.html",
-            "start": {
-              "line": 151,
-              "column": 2
-            },
-            "end": {
-              "line": 160,
-              "column": 3
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "inheritedFrom": "pxDatetimeRangeBehavior"
-        },
-        {
-          "name": "_applyMomentToString",
-          "description": "Applies the current 'from' and 'to' moment objects to the external facing 'range' strings",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "bower_components/px-datetime-common/px-datetime-range-behavior.html",
-            "start": {
-              "line": 164,
-              "column": 2
-            },
-            "end": {
-              "line": 166,
-              "column": 3
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "inheritedFrom": "pxDatetimeRangeBehavior"
-        },
-        {
-          "name": "_rollbackMomentFromString",
-          "description": "Rollbacks the current 'from' and 'to' moment objects to the external facing 'range' strings",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "bower_components/px-datetime-common/px-datetime-range-behavior.html",
-            "start": {
-              "line": 170,
-              "column": 2
-            },
-            "end": {
-              "line": 172,
+              "line": 89,
               "column": 3
             }
           },
@@ -583,11 +498,11 @@
           "sourceRange": {
             "file": "bower_components/px-datetime-common/px-datetime-range-behavior.html",
             "start": {
-              "line": 176,
+              "line": 93,
               "column": 2
             },
             "end": {
-              "line": 187,
+              "line": 104,
               "column": 3
             }
           },
@@ -602,43 +517,27 @@
           "sourceRange": {
             "file": "bower_components/px-datetime-common/px-datetime-range-behavior.html",
             "start": {
-              "line": 193,
+              "line": 110,
               "column": 2
             },
             "end": {
-              "line": 200,
-              "column": 3
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "return": {
-            "type": "Boolean",
-            "desc": "true if chronological order, false otherwise"
-          },
-          "inheritedFrom": "pxDatetimeRangeBehavior"
-        },
-        {
-          "name": "_notifyRangeChanged",
-          "description": "This event is fired differently depending on config:\n - If the px-datetime component has an Apply button, then it is fired when the\n  user clicks the Apply button (or presses enter) AND the selected date/time is valid\n - If the px-datetime component does not have an Apply button, then it is fired\n  every time a change is made to the date/time AND the selected date/time is valid",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "bower_components/px-datetime-common/px-datetime-range-behavior.html",
-            "start": {
-              "line": 212,
-              "column": 2
-            },
-            "end": {
-              "line": 234,
+              "line": 117,
               "column": 3
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "r"
+              "name": "fromMoment"
+            },
+            {
+              "name": "toMoment"
             }
           ],
+          "return": {
+            "type": "Boolean",
+            "desc": "true if chronological order, false otherwise"
+          },
           "inheritedFrom": "pxDatetimeRangeBehavior"
         },
         {
@@ -647,11 +546,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 258,
+              "line": 280,
               "column": 4
             },
             "end": {
-              "line": 264,
+              "line": 285,
               "column": 5
             }
           },
@@ -664,11 +563,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 268,
+              "line": 289,
               "column": 4
             },
             "end": {
-              "line": 272,
+              "line": 293,
               "column": 5
             }
           },
@@ -685,11 +584,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 276,
+              "line": 297,
               "column": 4
             },
             "end": {
-              "line": 280,
+              "line": 301,
               "column": 5
             }
           },
@@ -702,15 +601,15 @@
         },
         {
           "name": "_getWrapClass",
-          "description": "helper fuction to style the outer div",
+          "description": "Helper function to style the outer div",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 284,
+              "line": 305,
               "column": 4
             },
             "end": {
-              "line": 286,
+              "line": 307,
               "column": 5
             }
           },
@@ -723,15 +622,15 @@
         },
         {
           "name": "_getFromFieldClass",
-          "description": "helper function to style #fromFields",
+          "description": "Helper function to style #fromFields",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 290,
+              "line": 311,
               "column": 4
             },
             "end": {
-              "line": 292,
+              "line": 313,
               "column": 5
             }
           },
@@ -744,15 +643,15 @@
         },
         {
           "name": "_getToFieldClass",
-          "description": "helper function to style #toFields",
+          "description": "Helper function to style #toFields",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 296,
+              "line": 317,
               "column": 4
             },
             "end": {
-              "line": 301,
+              "line": 322,
               "column": 5
             }
           },
@@ -768,15 +667,15 @@
         },
         {
           "name": "_getIsValid",
-          "description": "computer function to determine if something is valid",
+          "description": "Computer function to determine if something is valid",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 305,
+              "line": 326,
               "column": 4
             },
             "end": {
-              "line": 310,
+              "line": 328,
               "column": 5
             }
           },
@@ -795,15 +694,15 @@
         },
         {
           "name": "_getIsRangeValid",
-          "description": "computer function to determine if the range is valid",
+          "description": "Function to determine if the range is valid",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 314,
+              "line": 332,
               "column": 4
             },
             "end": {
-              "line": 324,
+              "line": 342,
               "column": 5
             }
           },
@@ -823,11 +722,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 329,
+              "line": 347,
               "column": 4
             },
             "end": {
-              "line": 339,
+              "line": 363,
               "column": 5
             }
           },
@@ -849,15 +748,15 @@
         },
         {
           "name": "_dateTimeButtons",
-          "description": "",
+          "description": "Handle evt from a button being clicked",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 342,
+              "line": 367,
               "column": 4
             },
             "end": {
-              "line": 346,
+              "line": 375,
               "column": 5
             }
           },
@@ -870,36 +769,49 @@
         },
         {
           "name": "_onEsc",
-          "description": "",
+          "description": "Handle escape key press",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 349,
+              "line": 379,
               "column": 4
             },
             "end": {
-              "line": 353,
+              "line": 383,
               "column": 5
             }
           },
           "metadata": {},
-          "params": [
-            {
-              "name": "evt"
-            }
-          ]
+          "params": []
         },
         {
           "name": "_onEnter",
+          "description": "Handle enter key press",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 387,
+              "column": 4
+            },
+            "end": {
+              "line": 391,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_handleFromValid",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 356,
+              "line": 394,
               "column": 4
             },
             "end": {
-              "line": 360,
+              "line": 409,
               "column": 5
             }
           },
@@ -911,25 +823,80 @@
           ]
         },
         {
-          "name": "_momentChanged",
+          "name": "_handleToValid",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 363,
+              "line": 412,
               "column": 4
             },
             "end": {
-              "line": 367,
+              "line": 427,
               "column": 5
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "momentObj"
+              "name": "evt"
             }
           ]
+        },
+        {
+          "name": "_applyTemps",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 428,
+              "column": 4
+            },
+            "end": {
+              "line": 437,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_applyChanges",
+          "description": "Validate field and range\nIf valid set the momentObj(s) that changed",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 442,
+              "column": 4
+            },
+            "end": {
+              "line": 464,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "origin"
+            }
+          ]
+        },
+        {
+          "name": "_cancelChanges",
+          "description": "Clear fields or reset to previous moment objs",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 468,
+              "column": 4
+            },
+            "end": {
+              "line": 490,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": []
         }
       ],
       "staticMethods": [],
@@ -942,11 +909,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 100,
+          "line": 102,
           "column": 10
         },
         "end": {
-          "line": 368,
+          "line": 491,
           "column": 3
         }
       },
@@ -972,33 +939,15 @@
           "inheritedFrom": "pxDatetimeRangeBehavior"
         },
         {
-          "name": "range",
-          "description": "(required: 'px-{datetime}-range-{picker}')\n\nThis is the object you use to instantiate px-datetime components. You can retrieve the object through 2-way data-binding.\n\nFormated as ISO8601 strings\n```\n{\n   \"from\": \"2013-01-07T22:44:30.652Z\",\n   \"to\" : \"2013-02-04T22:44:30.652Z\"\n}\n```\n\nThis object which will be changed when the user Submits their new selected range.",
-          "sourceRange": {
-            "file": "bower_components/px-datetime-common/px-datetime-range-behavior.html",
-            "start": {
-              "line": 89,
-              "column": 4
-            },
-            "end": {
-              "line": 98,
-              "column": 5
-            }
-          },
-          "metadata": {},
-          "type": "Object",
-          "inheritedFrom": "pxDatetimeRangeBehavior"
-        },
-        {
           "name": "date-format",
           "description": "Moment format string for the DATE format to display/validate this field against\n(see http://momentjs.com/docs/#/parsing/string-format/)",
           "sourceRange": {
             "start": {
-              "line": 116,
+              "line": 118,
               "column": 6
             },
             "end": {
-              "line": 119,
+              "line": 121,
               "column": 7
             }
           },
@@ -1010,11 +959,11 @@
           "description": "Moment format string for the TIME format to display/validate this field against\n(see http://momentjs.com/docs/#/parsing/string-format/)",
           "sourceRange": {
             "start": {
-              "line": 125,
+              "line": 127,
               "column": 6
             },
             "end": {
-              "line": 128,
+              "line": 130,
               "column": 7
             }
           },
@@ -1023,14 +972,14 @@
         },
         {
           "name": "show-time-zone",
-          "description": "Can be set to show the timezone. Can have 2 values:\n - 'dropdown': shows the time zone as a dropdown which the user can use to select a different time zone. Only contains a subset of all timezones\n - 'extendedDropdown': shows the time zone as a dropdown which the user can use toselect a different time zone. Contains all existing timezones (588)\n - 'text': shows the time zone as text, non editable\n - 'abbreviatedText': shows the time zone as an abbreviated text, non editable (such as PST, EST...)",
+          "description": "Can be set to show the timezone. Can have 4 possible values:\n - 'dropdown': Shows the time zone as a dropdown which the user can use to select a different time zone. Only contains a subset of all time zones.\n - 'extendedDropdown': Shows the time zone as a dropdown which the user can use to select a different time zone. Contains all existing time zones (588) from the IANA tz database.\n - 'text': Shows the time zone as non-editable text.\n - 'abbreviatedText': Shows the abbreviated time zone as non editable text (such as PST, EST, etc). Note: many time zones do not have an abbreviation.",
           "sourceRange": {
             "start": {
-              "line": 137,
+              "line": 139,
               "column": 6
             },
             "end": {
-              "line": 140,
+              "line": 142,
               "column": 7
             }
           },
@@ -1039,14 +988,14 @@
         },
         {
           "name": "hide-time",
-          "description": "Controls whether time is displayed in this field",
+          "description": "Controls whether time should be hidden in this field.",
           "sourceRange": {
             "start": {
-              "line": 144,
+              "line": 146,
               "column": 6
             },
             "end": {
-              "line": 147,
+              "line": 149,
               "column": 7
             }
           },
@@ -1055,14 +1004,14 @@
         },
         {
           "name": "hide-date",
-          "description": "Controls whether date should be hidden in this field. Typically used\nin combination with hideTime to make the field showing only the time",
+          "description": "Controls whether date should be hidden in this field.",
           "sourceRange": {
             "start": {
-              "line": 152,
+              "line": 153,
               "column": 6
             },
             "end": {
-              "line": 155,
+              "line": 156,
               "column": 7
             }
           },
@@ -1071,14 +1020,14 @@
         },
         {
           "name": "hide-icon",
-          "description": "Controls whether the calendar/clock icons should be hidden",
+          "description": "Controls whether the calendar/clock icons should be hidden.",
           "sourceRange": {
             "start": {
-              "line": 159,
+              "line": 160,
               "column": 6
             },
             "end": {
-              "line": 162,
+              "line": 163,
               "column": 7
             }
           },
@@ -1087,14 +1036,30 @@
         },
         {
           "name": "is-valid",
-          "description": "Booleaning stating if the date, time, or range is valid.",
+          "description": "Boolean stating if the date, time, or range is valid.",
           "sourceRange": {
             "start": {
-              "line": 166,
+              "line": 167,
               "column": 6
             },
             "end": {
-              "line": 170,
+              "line": 171,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "required",
+          "description": "Boolean stating if the range field is required.\nWill result in an error if left blank.",
+          "sourceRange": {
+            "start": {
+              "line": 176,
+              "column": 6
+            },
+            "end": {
+              "line": 179,
               "column": 7
             }
           },
@@ -1103,14 +1068,14 @@
         },
         {
           "name": "hide-validation-messages",
-          "description": "Hides the validation messages if set to true",
+          "description": "Hides the validation messages if set to 'true'",
           "sourceRange": {
             "start": {
-              "line": 209,
+              "line": 216,
               "column": 6
             },
             "end": {
-              "line": 212,
+              "line": 219,
               "column": 7
             }
           },
@@ -1119,14 +1084,14 @@
         },
         {
           "name": "prevent-notification-on-change",
-          "description": "Used to prevent this element from firing px-datetime-range-submitted\nevent and prevent changes to range",
+          "description": "Used to prevent this element from firing px-datetime-range-submitted event.",
           "sourceRange": {
             "start": {
-              "line": 217,
+              "line": 223,
               "column": 6
             },
             "end": {
-              "line": 220,
+              "line": 226,
               "column": 7
             }
           },
@@ -1138,11 +1103,11 @@
           "description": "Allows the component to wrap the fields and buttons",
           "sourceRange": {
             "start": {
-              "line": 224,
+              "line": 230,
               "column": 6
             },
             "end": {
-              "line": 227,
+              "line": 233,
               "column": 7
             }
           },
@@ -1154,11 +1119,11 @@
           "description": "List of key/values to be included for translating this component",
           "sourceRange": {
             "start": {
-              "line": 231,
+              "line": 249,
               "column": 6
             },
             "end": {
-              "line": 242,
+              "line": 260,
               "column": 7
             }
           },
@@ -1167,20 +1132,6 @@
         }
       ],
       "events": [
-        {
-          "type": "CustomEvent",
-          "name": "px-datetime-range-submitted",
-          "description": "px-datetime-range-submitted",
-          "metadata": {},
-          "inheritedFrom": "pxDatetimeRangeBehavior"
-        },
-        {
-          "type": "CustomEvent",
-          "name": "range-changed",
-          "description": "Fired when the `range` property changes.",
-          "metadata": {},
-          "inheritedFrom": "pxDatetimeRangeBehavior"
-        },
         {
           "type": "CustomEvent",
           "name": "is-valid-changed",

@@ -131,33 +131,32 @@ Custom property | Description
       },
       /**
        *
-       * Can be set to show the timezone. Can have 2 values:
-       *  - 'dropdown': shows the time zone as a dropdown which the user can use to select a different time zone. Only contains a subset of all timezones
-       *  - 'extendedDropdown': shows the time zone as a dropdown which the user can use toselect a different time zone. Contains all existing timezones (588)
-       *  - 'text': shows the time zone as text, non editable
-       *  - 'abbreviatedText': shows the time zone as an abbreviated text, non editable (such as PST, EST...)
+       * Can be set to show the timezone. Can have 4 possible values:
+       *  - 'dropdown': Shows the time zone as a dropdown which the user can use to select a different time zone. Only contains a subset of all time zones.
+       *  - 'extendedDropdown': Shows the time zone as a dropdown which the user can use to select a different time zone. Contains all existing time zones (588) from the IANA tz database.
+       *  - 'text': Shows the time zone as non-editable text.
+       *  - 'abbreviatedText': Shows the abbreviated time zone as non editable text (such as PST, EST, etc). Note: many time zones do not have an abbreviation.
        */
       showTimeZone: {
         type: String,
         value: ''
       },
       /**
-       * Controls whether time is displayed in this field
+       * Controls whether time should be hidden in this field.
        */
       hideTime: {
         type: Boolean,
         value: false
       },
       /**
-       * Controls whether date should be hidden in this field. Typically used
-       * in combination with hideTime to make the field showing only the time
+       * Controls whether date should be hidden in this field.
        */
       hideDate: {
         type: Boolean,
         value: false
       },
       /**
-       * Controls whether the calendar/clock icons should be hidden
+       * Controls whether the calendar/clock icons should be hidden.
        */
       hideIcon: {
         type: Boolean,
@@ -180,20 +179,20 @@ Custom property | Description
         value: false
       },
       /**
-       * used internally to determine if the range validation error should be displayed
+       * Used internally to determine if the range validation error should be displayed.
        */
       _isRangeValid: {
         type: Boolean,
         value: true
       },
       /**
-       * Reflects if the from field is valid
+       * Reflects if the 'from' field is valid
        */
       _fromValid: {
         type: Boolean
       },
       /**
-       * Reflects if the to field is valid
+       * Reflects if the 'to' field is valid
        */
       _toValid: {
         type: Boolean
@@ -213,15 +212,14 @@ Custom property | Description
         value: false
       },
       /**
-       * Hides the validation messages if set to true
+       * Hides the validation messages if set to 'true'
        */
       hideValidationMessages: {
         type: Boolean,
         value: false
       },
       /**
-       * Used to prevent this element from firing px-datetime-range-submitted
-       * event and prevent changes to range
+       * Used to prevent this element from firing px-datetime-range-submitted event.
        */
       preventNotificationOnChange: {
         type: Boolean,
@@ -460,6 +458,7 @@ Custom property | Description
         if(this._isRangeValid) {
           this.set('fromMoment', this._tempFromMomentObj);
           this.set('toMoment', this._tempToMomentObj);
+          this.fire('px-datetime-range-submitted', {})
         }
       }
 
