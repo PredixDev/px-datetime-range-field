@@ -160,6 +160,7 @@ suite('submit without buttons', function() {
       assert.equal(i, 0);
       assert.isFalse(range.isValid);
       assert.isFalse(range._isRangeValid);
+      debugger
       assert.isTrue(wrapper.classList.contains('validation-error'));
       range.removeEventListener('to-moment-changed', listener);
       done();

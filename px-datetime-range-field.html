@@ -47,7 +47,7 @@ Custom property | Description
           hide-date="[[hideDate]]"
           hide-icon="{{hideIcon}}"
           is-valid="{{_fromValid}}"
-          show-validation-message="[[_showFromValidationMessage]]"
+          hide-validation-message="[[!_showFromValidationMessage]]"
           prevent-apply
           block-future-dates="{{blockFutureDates}}"
           block-past-dates="{{blockPastDates}}"
@@ -75,7 +75,7 @@ Custom property | Description
           hide-date="[[hideDate]]"
           hide-icon="{{hideIcon}}"
           is-valid="{{_toValid}}"
-          show-validation-message="[[_showToValidationMessage]]"
+          hide-validation-message="[[!_showToValidationMessage]]"
           prevent-apply
           block-future-dates="{{blockFutureDates}}"
           block-past-dates="{{blockPastDates}}"
