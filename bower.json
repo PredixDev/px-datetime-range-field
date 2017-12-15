@@ -27,8 +27,8 @@
   ],
   "dependencies": {
     "polymer": "#1.9 - 2",
-    "px-datetime-common": "^2.0.0",
-    "px-datetime-field": "#allowBlank"
+    "px-datetime-common": "allowBlank",
+    "px-datetime-field": "allowBlank"
   },
   "devDependencies": {
     "px-theme": "^3.0.0",
