@@ -397,7 +397,7 @@ Custom property | Description
 
           if(this.isValid && !preventApply) {
             if(this._applyTempRangeMoment()) {
-              this.fire('px-datetime-range-submitted', {})
+              this.fire('px-datetime-range-submitted', {'fromMoment': this.fromMoment, 'toMoment': this.toMoment});
             }
           }
         } else {
