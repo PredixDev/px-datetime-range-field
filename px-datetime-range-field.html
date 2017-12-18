@@ -430,11 +430,11 @@ Custom property | Description
     _applyTemps: function() {
       if(this.fromMoment) {
         this.set('_tempFromMomentObj', this.fromMoment);
-        this._applyChanges();
+        if(!this.preventNotificationOnChange){this._applyChanges();}
       }
       if(this.toMoment) {
         this.set('_tempToMomentObj', this.toMoment);
-        this._applyChanges();
+        if(!this.preventNotificationOnChange){this._applyChanges();}
       }
     },
     /**
