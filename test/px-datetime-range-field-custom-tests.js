@@ -124,21 +124,19 @@ suite('submit without buttons', function() {
         dateInput = Polymer.dom(todateCells[1].root).querySelector('input'),
         e = document.createEvent('Event'),
         i = 0;
+
     var listener = function(evt) {
-      i++;
-    };
-    range.addEventListener('to-moment-changed', listener);
-    dateInput.value = '12';
-    e.initEvent("blur", true, true);
-    dateInput.dispatchEvent(e);
-    setTimeout(function() {
-      assert.equal(i, 1);
       assert.isTrue(range.isValid);
       assert.isTrue(range._toValid);
       assert.isFalse(wrapper.classList.contains('validation-error'));
       range.removeEventListener('to-moment-changed', listener);
       done();
-    }, 100);
+    };
+    range.addEventListener('to-moment-changed', listener);
+    dateInput.value = '12';
+    e.initEvent("blur", true, true);
+
+    dateInput.dispatchEvent(e);
   });
 
   test('moment is not changed when range is backwards', function(done) {
@@ -160,7 +158,6 @@ suite('submit without buttons', function() {
       assert.equal(i, 0);
       assert.isFalse(range.isValid);
       assert.isFalse(range._isRangeValid);
-      debugger
       assert.isTrue(wrapper.classList.contains('validation-error'));
       range.removeEventListener('to-moment-changed', listener);
       done();

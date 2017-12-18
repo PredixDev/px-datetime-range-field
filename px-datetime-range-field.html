@@ -38,7 +38,7 @@ Custom property | Description
         <span class="a11y">[[localize('from')]]</span>
         <px-datetime-field
           id="fromDate"
-          moment-obj="{{fromMoment}}"
+          moment-obj="{{_tempFromMomentObj}}"
           date-format="[[dateFormat]]"
           time-format="[[timeFormat]]"
           show-time-zone="[[showTimeZone]]"
@@ -48,7 +48,6 @@ Custom property | Description
           hide-icon="{{hideIcon}}"
           is-valid="{{_fromValid}}"
           hide-validation-message="[[!_showFromValidationMessage]]"
-          prevent-apply
           block-future-dates="{{blockFutureDates}}"
           block-past-dates="{{blockPastDates}}"
           resources="[[resources]]"
@@ -66,7 +65,7 @@ Custom property | Description
       <div id="toFields" class$="{{_getToFieldClass(showButtons, allowWrap)}}">
         <px-datetime-field
           id="toDate"
-          moment-obj="{{toMoment}}"
+          moment-obj="{{_tempToMomentObj}}"
           date-format="[[dateFormat]]"
           time-format="[[timeFormat]]"
           show-time-zone="[[showTimeZone]]"
@@ -76,7 +75,6 @@ Custom property | Description
           hide-icon="{{hideIcon}}"
           is-valid="{{_toValid}}"
           hide-validation-message="[[!_showToValidationMessage]]"
-          prevent-apply
           block-future-dates="{{blockFutureDates}}"
           block-past-dates="{{blockPastDates}}"
           resources="[[resources]]"
@@ -107,7 +105,7 @@ Custom property | Description
     is: 'px-datetime-range-field',
 
     behaviors: [
-      pxDatetimeRangeBehavior,
+      pxDatetimeTempRangeBehavior,
       pxDatetimeButtonBehavior,
       validate
     ],
@@ -221,30 +219,11 @@ Custom property | Description
         value: false
       },
       /**
-       * Used to prevent this element from firing px-datetime-range-submitted event.
-       */
-      preventNotificationOnChange: {
-        type: Boolean,
-        value: false
-      },
-      /**
        * Allows the component to wrap the fields and buttons
        */
       allowWrap: {
         type: Boolean,
         value: false
-      },
-      /**
-       * Temporary moment object used for validation prior to applying as a new value for fromMoment.
-       */
-      _tempFromMomentObj: {
-        type: Object
-      },
-      /**
-       * Temporary moment object used for validation prior to applying as a new value for toMoment.
-       */
-       _tempToMomentObj: {
-        type: Object
       },
       /**
        * List of key/values to be included for translating this component
@@ -270,12 +249,11 @@ Custom property | Description
       'enter': '_onEnter'
     },
     observers: [
-      '_validationMessagePriority(_fromValid, _toValid, _isRangeValid, hideValidationMessages)',
-      '_applyTemps(fromMoment, toMoment)'
+      '_validationMessagePriority(_fromValid, _toValid, _isRangeValid, hideValidationMessages)'
     ],
     listeners: {
       'px-datetime-button-clicked': '_dateTimeButtons',
-      'blur': '_applyChanges'
+      'blur': '_tempMomentChanged'
     },
     /**
      * Sets up listeners for a variety of events fired from or passing through this component
@@ -283,8 +261,8 @@ Custom property | Description
     ready: function() {
       this.listen(this.$.fromDate, 'px-next-field', '_focusFirstToEntry');
       this.listen(this.$.toDate, 'px-previous-field', '_focusLastFromEntry');
-      this.listen(this.$.fromDate, 'px-field-valid', '_handleFromValid');
-      this.listen(this.$.toDate, 'px-field-valid', '_handleToValid');
+      this.listen(this.$.fromDate, 'moment-obj-changed', '_tempMomentChanged');
+      this.listen(this.$.toDate, 'moment-obj-changed', '_tempMomentChanged');
     },
     /*
      * Focuses select on the first entry of the 'to' field
@@ -324,15 +302,27 @@ Custom property | Description
       return classList;
     },
     /**
-     * Computer function to determine if something is valid
+     * Computed function to determine if everything is valid
      */
     _getIsValid: function(_fromValid, _toValid, _isRangeValid) {
       return (_fromValid && _toValid && _isRangeValid);
     },
     /**
+     * Whether exaclty one field is currently empty
+     */
+    _isOneFieldEmpty:function() {
+      //if only one of the two fields has been filled then treat as non valid but don't alert
+      if((this._tempFromMomentObj && !this._tempToMomentObj) || (!this._tempFromMomentObj && this._tempToMomentObj)) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    /**
      * Function to determine if the range is valid
      */
-    _getIsRangeValid: function(fromMoment, toMoment) {
+    _validateRangeAndFailedClass: function(fromMoment, toMoment) {
+
       if (!this._validateRangeOrder(fromMoment, toMoment)) {
         this.$.fromDate._forcedFailedClass = true;
         this.$.toDate._forcedFailedClass = true;
@@ -368,12 +358,10 @@ Custom property | Description
      * Handle evt from a button being clicked
      */
     _dateTimeButtons: function(evt) {
-      if(!this.preventNotificationOnChange) {
-        if (evt.detail.action) {
-          this._applyChanges('buttons');
-        } else {
-          this._cancelChanges();
-        }
+      if (evt.detail.action) {
+        this._applyChanges();
+      } else {
+        this._cancelChanges();
       }
     },
     /**
@@ -386,81 +374,36 @@ Custom property | Description
      * Handle enter key press
      */
     _onEnter: function() {
-      this._applyChanges('buttons');
+      this._applyChanges();
     },
-    /**
-     */
-    _handleFromValid: function(evt) {
-      if(evt.detail && evt.detail.momentObj) {
-        var newFromMomentObj = evt.detail.momentObj;
-        if(typeof newFromMomentObj === 'object') {
-          this.set('_tempFromMomentObj', newFromMomentObj);
-          this._applyChanges();
-        }
-        else if(newFromMomentObj === 'FieldBlank' || newFromMomentObj === 'FieldSame') {
-          this.set('_tempFromMomentObj', undefined);
-          this._applyChanges();
-        }
-      }
-    },
-    /**
-     */
-    _handleToValid: function(evt) {
-      if(evt.detail && evt.detail.momentObj) {
-        var newToMomentObj = evt.detail.momentObj;
-        if(typeof newToMomentObj === 'object') {
-          this.set('_tempToMomentObj', newToMomentObj);
-          this._applyChanges();
-        }
-        else if(newToMomentObj === 'FieldBlank' || newToMomentObj === 'FieldSame') {
-          this.set('_tempToMomentObj', undefined);
-          this._applyChanges();
-        }
-      }
-    },
-    /**
-     * Observer to make sure that fromMoment and toMoment are
-     * copied to their internal copies if they're passed in or
-     * set programmatically.
-     */
-    _applyTemps: function() {
-      if(this.fromMoment) {
-        this.set('_tempFromMomentObj', this.fromMoment);
-        if(!this.preventNotificationOnChange){this._applyChanges();}
-      }
-      if(this.toMoment) {
-        this.set('_tempToMomentObj', this.toMoment);
-        if(!this.preventNotificationOnChange){this._applyChanges();}
+    _tempMomentChanged: function() {
+      if(!this.showButtons) {
+        this._applyChanges();
+      } else {
+        this._applyChanges(true);
       }
     },
     /**
      * Validates that range is in correct order.
      * If valid, set the momentObjs from temp.
      */
-    _applyChanges: function (origin) {
-      if(origin !== 'buttons' && this.showButtons) return;
-      // Both fields are empty
-      if(!this._tempFromMomentObj && !this._tempToMomentObj) {
-        if(this.required) {
-          this.isValid = false;
-        }
-        else {
-          this.set('fromMoment', undefined);
-          this.set('toMoment', undefined);
-          this.set('_isRangeValid', true);
-        }
-      }
-      // Both fields are populated
-      else if(this._tempFromMomentObj && this._tempToMomentObj) {
-        // Figure out whether from is before to and set the new moment objects accordingly
-        this.set('_isRangeValid', this._getIsRangeValid(this._tempFromMomentObj, this._tempToMomentObj));
-        if(this._isRangeValid) {
-          this.set('fromMoment', this._tempFromMomentObj);
-          this.set('toMoment', this._tempToMomentObj);
-          this.fire('px-datetime-range-submitted', {})
-        }
-      }
+    _applyChanges: function (preventApply) {
 
+      //don't do anything if we have only one field at the moment
+      if(!this._isOneFieldEmpty()) {
+
+        if(this._validateRangeAndFailedClass(this._tempFromMomentObj, this._tempToMomentObj)) {
+          this.set('_isRangeValid', true);
+
+          if(this.isValid && !preventApply) {
+            if(this._applyTempRangeMoment()) {
+              this.fire('px-datetime-range-submitted', {})
+            }
+          }
+        } else {
+          this.set('_isRangeValid', false);
+        }
+      }
     },
     /**
      * Clear fields or reset to previous moment objs
@@ -468,6 +411,8 @@ Custom property | Description
     _cancelChanges: function () {
       this.$.fromDate._cancelChanges();
       this.$.toDate._cancelChanges();
+      this._rollbackTempFromMoment();
+      this._rollbackTempToMoment();
     }
   });
 </script>
