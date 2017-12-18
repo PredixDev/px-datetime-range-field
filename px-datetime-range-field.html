@@ -380,17 +380,13 @@ Custom property | Description
      * Handle escape key press
      */
     _onEsc: function() {
-      if(!this.preventNotificationOnChange) {
-        this._cancelChanges();
-      }
+      this._cancelChanges();
     },
     /**
      * Handle enter key press
      */
     _onEnter: function() {
-      if(!this.preventNotificationOnChange) {
-        this._applyChanges('buttons');
-      }
+      this._applyChanges('buttons');
     },
     /**
      */
