@@ -413,6 +413,9 @@ Custom property | Description
       this.$.toDate._cancelChanges();
       this._rollbackTempFromMoment();
       this._rollbackTempToMoment();
+
+      //rerun validation but don't actually apply
+      this._applyChanges(true);
     }
   });
 </script>
