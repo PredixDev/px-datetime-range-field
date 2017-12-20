@@ -57,7 +57,7 @@ Custom property | Description
           max-date="[[maxDate]]"
           required="[[required]]">
         </px-datetime-field>
-        <template is="dom-if" if="{{!_isRangeValid}}">
+        <template is="dom-if" if="{{_handleRangeValidationMessage(_isRangeValid, hideValidationMessages)}}">
           <div class="form-field__help validation-error dt-validation-text">[[localize('from cannot be later than to date')]]</div>
         </template>
       </div>
@@ -353,6 +353,12 @@ Custom property | Description
           this.set('_showToValidationMessage', true);
         }
       }
+    },
+    /**
+     * Determines whether to show the range validation error message
+     */
+    _handleRangeValidationMessage: function (_isRangeValid, hideValidationMessages) {
+      return (hideValidationMessages || _isRangeValid) ? false : true;
     },
     /**
      * Handle evt from a button being clicked
