@@ -49,7 +49,7 @@
       <px-demo-component slot="px-demo-component">
         <p class=u-mb0>Event fired: <strong>px-datetime-range-submitted</strong></p>
         <p class="zeta u-mt0">See API Reference below for more details</p>
-        <p class="u-mb++">Current range object: <strong>{{props.range.value.from}}</strong> To: <strong>{{props.range.value.to}}</strong></p>
+        <p class="u-mb++">Submitted range: <strong>{{props.fromMoment.value}}</strong> To: <strong>{{props.toMoment.value}}</strong></p>
 
         <px-datetime-range-field
           from-moment="{{props.fromMoment.value}}"
@@ -152,8 +152,6 @@
               allowWrap: true,
               showTimeZone: "extendedDropdown",
               timeZone: "America/Los_Angeles",
-              minDate: Px.moment().subtract(3, 'month'),
-              maxDate: Px.moment().add(3, 'month'),
               fromMoment: Px.moment().subtract(8, 'day').startOf('day'),
               toMoment: Px.moment().subtract(1, 'day').startOf('day'),
             },
@@ -169,8 +167,6 @@
               allowWrap: false,
               showTimeZone: "text",
               timeZone: "UTC",
-              minDate: Px.moment().subtract(3, 'month'),
-              maxDate: Px.moment().add(3, 'month'),
               fromMoment: Px.moment().subtract(8, 'day').startOf('day'),
               toMoment: Px.moment().subtract(1, 'day').startOf('day')
             }
