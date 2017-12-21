@@ -2,77 +2,10 @@
   "schema_version": "1.0.0",
   "elements": [
     {
-      "description": "The datetime components rely on <a href=\"https://momentjs.com/\" target=\"_blank\">Moment.js</a> and <a href=\"https://momentjs.com/timezone/\" target=\"_blank\">Moment Timezone</a>.\n\n### Usage\n\n    <px-datetime-range-field from-moment=\"{{...}}\" to-moment=\"{{...}}\">\n    </px-datetime-range-field>\n\n\n### Styling\n\nThe following custom properties are available for styling. Please also refer to px-forms-design for additional style variables used by this component.\n\nCustom property | Description\n:----------------|:-------------\n`--px-datetime-range-field-to-color` | Text color of the \"TO\" between start and end date input fields",
+      "description": "The datetime components rely on [Moment.js](https://momentjs.com/) and [Moment Timezone](https://momentjs.com/timezone/).\n\n### Usage\n\n    <px-datetime-range-field from-moment=\"{{...}}\" to-moment=\"{{...}}\">\n    </px-datetime-range-field>\n\n\n### Styling\n\nThe following custom properties are available for styling. Please also refer to px-forms-design for additional style variables used by this component.\n\nCustom property | Description\n:----------------|:-------------\n`--px-datetime-range-field-to-color` | Text color of the \"TO\" between start and end date input fields",
       "summary": "",
       "path": "px-datetime-range-field.html",
       "properties": [
-        {
-          "name": "fromMoment",
-          "type": "Object",
-          "description": "Moment object start date & time",
-          "privacy": "private",
-          "sourceRange": {
-            "file": "bower_components/px-datetime-common/px-datetime-range-behavior.html",
-            "start": {
-              "line": 19,
-              "column": 4
-            },
-            "end": {
-              "line": 22,
-              "column": 5
-            }
-          },
-          "metadata": {
-            "polymer": {
-              "notify": true
-            }
-          },
-          "inheritedFrom": "PxDatetimeBehavior.rangeMoments"
-        },
-        {
-          "name": "toMoment",
-          "type": "Object",
-          "description": "Moment object end date & time",
-          "privacy": "private",
-          "sourceRange": {
-            "file": "bower_components/px-datetime-common/px-datetime-range-behavior.html",
-            "start": {
-              "line": 28,
-              "column": 4
-            },
-            "end": {
-              "line": 31,
-              "column": 5
-            }
-          },
-          "metadata": {
-            "polymer": {
-              "notify": true
-            }
-          },
-          "inheritedFrom": "PxDatetimeBehavior.rangeMoments"
-        },
-        {
-          "name": "presetRanges",
-          "type": "Object",
-          "description": "(optional:  'px-{datetime}-range-panel')\n\nThe preset date/time ranges to be displayed.\n\n```\n  [\n   {\n     \"displayText\": \"Last 5 Minutes\",\n     \"startDateTime\": \"2013-02-04T22:44:30.652Z\",\n     \"endDateTime\": \"2013-02-04T22:49:30.652Z\"\n   },\n   {\n     \"displayText\": \"Last 12 Hours\",\n     \"startDateTime\": \"2013-02-04T10:44:30.652Z\",\n     \"endDateTime\": \"2013-02-04T22:49:30.652Z\"\n   }\n  ]\n```",
-          "privacy": "public",
-          "sourceRange": {
-            "file": "bower_components/px-datetime-common/px-datetime-range-behavior.html",
-            "start": {
-              "line": 70,
-              "column": 4
-            },
-            "end": {
-              "line": 70,
-              "column": 24
-            }
-          },
-          "metadata": {
-            "polymer": {}
-          },
-          "inheritedFrom": "pxDatetimeRangeBehavior"
-        },
         {
           "name": "dateFormat",
           "type": "string",
@@ -354,9 +287,9 @@
           "defaultValue": "false"
         },
         {
-          "name": "preventNotificationOnChange",
+          "name": "allowWrap",
           "type": "boolean",
-          "description": "Used to prevent this element from firing px-datetime-range-submitted event.",
+          "description": "Allows the component to wrap the fields and buttons",
           "privacy": "public",
           "sourceRange": {
             "start": {
@@ -374,9 +307,9 @@
           "defaultValue": "false"
         },
         {
-          "name": "allowWrap",
-          "type": "boolean",
-          "description": "Allows the component to wrap the fields and buttons",
+          "name": "resources",
+          "type": "Object",
+          "description": "List of key/values to be included for translating this component",
           "privacy": "public",
           "sourceRange": {
             "start": {
@@ -384,65 +317,7 @@
               "column": 6
             },
             "end": {
-              "line": 233,
-              "column": 7
-            }
-          },
-          "metadata": {
-            "polymer": {}
-          },
-          "defaultValue": "false"
-        },
-        {
-          "name": "_tempFromMomentObj",
-          "type": "Object",
-          "description": "Temporary moment object used for validation prior to applying as a new value for fromMoment.",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 237,
-              "column": 6
-            },
-            "end": {
-              "line": 239,
-              "column": 7
-            }
-          },
-          "metadata": {
-            "polymer": {}
-          }
-        },
-        {
-          "name": "_tempToMomentObj",
-          "type": "Object",
-          "description": "Temporary moment object used for validation prior to applying as a new value for toMoment.",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 243,
-              "column": 7
-            },
-            "end": {
-              "line": 245,
-              "column": 7
-            }
-          },
-          "metadata": {
-            "polymer": {}
-          }
-        },
-        {
-          "name": "resources",
-          "type": "Object",
-          "description": "List of key/values to be included for translating this component",
-          "privacy": "public",
-          "sourceRange": {
-            "start": {
-              "line": 249,
-              "column": 6
-            },
-            "end": {
-              "line": 260,
+              "line": 241,
               "column": 7
             }
           },
@@ -458,11 +333,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 265,
+              "line": 246,
               "column": 4
             },
             "end": {
-              "line": 268,
+              "line": 249,
               "column": 5
             }
           },
@@ -473,84 +348,16 @@
       ],
       "methods": [
         {
-          "name": "_localeChanged",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "bower_components/px-datetime-common/px-datetime-range-behavior.html",
-            "start": {
-              "line": 79,
-              "column": 2
-            },
-            "end": {
-              "line": 89,
-              "column": 3
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "inheritedFrom": "pxDatetimeRangeBehavior"
-        },
-        {
-          "name": "_timeZoneChanged",
-          "description": "makes sure the moment objects reflect the timezone",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "bower_components/px-datetime-common/px-datetime-range-behavior.html",
-            "start": {
-              "line": 93,
-              "column": 2
-            },
-            "end": {
-              "line": 104,
-              "column": 3
-            }
-          },
-          "metadata": {},
-          "params": [],
-          "inheritedFrom": "pxDatetimeRangeBehavior"
-        },
-        {
-          "name": "_validateRangeOrder",
-          "description": "Validation for the range. Makes sure the ranges are in chronological order",
-          "privacy": "protected",
-          "sourceRange": {
-            "file": "bower_components/px-datetime-common/px-datetime-range-behavior.html",
-            "start": {
-              "line": 110,
-              "column": 2
-            },
-            "end": {
-              "line": 117,
-              "column": 3
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "fromMoment"
-            },
-            {
-              "name": "toMoment"
-            }
-          ],
-          "return": {
-            "type": "Boolean",
-            "desc": "true if chronological order, false otherwise"
-          },
-          "inheritedFrom": "pxDatetimeRangeBehavior"
-        },
-        {
           "name": "ready",
           "description": "Sets up listeners for a variety of events fired from or passing through this component",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 280,
+              "line": 260,
               "column": 4
             },
             "end": {
-              "line": 285,
+              "line": 265,
               "column": 5
             }
           },
@@ -563,11 +370,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 289,
+              "line": 269,
               "column": 4
             },
             "end": {
-              "line": 293,
+              "line": 273,
               "column": 5
             }
           },
@@ -584,11 +391,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 297,
+              "line": 277,
               "column": 4
             },
             "end": {
-              "line": 301,
+              "line": 281,
               "column": 5
             }
           },
@@ -605,11 +412,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 305,
+              "line": 285,
               "column": 4
             },
             "end": {
-              "line": 307,
+              "line": 287,
               "column": 5
             }
           },
@@ -626,11 +433,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 311,
+              "line": 291,
               "column": 4
             },
             "end": {
-              "line": 313,
+              "line": 293,
               "column": 5
             }
           },
@@ -647,11 +454,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 317,
+              "line": 297,
               "column": 4
             },
             "end": {
-              "line": 322,
+              "line": 302,
               "column": 5
             }
           },
@@ -667,15 +474,15 @@
         },
         {
           "name": "_getIsValid",
-          "description": "Computer function to determine if something is valid",
+          "description": "Computed function to determine if everything is valid",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 326,
+              "line": 306,
               "column": 4
             },
             "end": {
-              "line": 328,
+              "line": 308,
               "column": 5
             }
           },
@@ -693,16 +500,33 @@
           ]
         },
         {
-          "name": "_getIsRangeValid",
+          "name": "_isOneFieldEmpty",
+          "description": "Whether exaclty one field is currently empty",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 312,
+              "column": 4
+            },
+            "end": {
+              "line": 319,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_validateRangeAndFailedClass",
           "description": "Function to determine if the range is valid",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 332,
+              "line": 323,
               "column": 4
             },
             "end": {
-              "line": 342,
+              "line": 334,
               "column": 5
             }
           },
@@ -722,11 +546,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 347,
+              "line": 339,
               "column": 4
             },
             "end": {
-              "line": 363,
+              "line": 355,
               "column": 5
             }
           },
@@ -747,16 +571,40 @@
           ]
         },
         {
+          "name": "_handleRangeValidationMessage",
+          "description": "Determines whether to show the range validation error message",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 359,
+              "column": 4
+            },
+            "end": {
+              "line": 361,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "_isRangeValid"
+            },
+            {
+              "name": "hideValidationMessages"
+            }
+          ]
+        },
+        {
           "name": "_dateTimeButtons",
           "description": "Handle evt from a button being clicked",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 367,
+              "line": 365,
               "column": 4
             },
             "end": {
-              "line": 375,
+              "line": 371,
               "column": 5
             }
           },
@@ -773,11 +621,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 379,
+              "line": 375,
               "column": 4
             },
             "end": {
-              "line": 383,
+              "line": 377,
               "column": 5
             }
           },
@@ -790,11 +638,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 387,
+              "line": 381,
               "column": 4
             },
             "end": {
-              "line": 391,
+              "line": 383,
               "column": 5
             }
           },
@@ -802,58 +650,16 @@
           "params": []
         },
         {
-          "name": "_handleFromValid",
+          "name": "_tempMomentChanged",
           "description": "",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 394,
+              "line": 384,
               "column": 4
             },
             "end": {
-              "line": 409,
-              "column": 5
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "evt"
-            }
-          ]
-        },
-        {
-          "name": "_handleToValid",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 412,
-              "column": 4
-            },
-            "end": {
-              "line": 427,
-              "column": 5
-            }
-          },
-          "metadata": {},
-          "params": [
-            {
-              "name": "evt"
-            }
-          ]
-        },
-        {
-          "name": "_applyTemps",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 428,
-              "column": 4
-            },
-            "end": {
-              "line": 437,
+              "line": 390,
               "column": 5
             }
           },
@@ -862,22 +668,22 @@
         },
         {
           "name": "_applyChanges",
-          "description": "Validate field and range\nIf valid set the momentObj(s) that changed",
+          "description": "Validates that range is in correct order.\nIf valid, set the momentObjs from temp.",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 442,
+              "line": 395,
               "column": 4
             },
             "end": {
-              "line": 464,
+              "line": 412,
               "column": 5
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "origin"
+              "name": "preventApply"
             }
           ]
         },
@@ -887,11 +693,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 468,
+              "line": 416,
               "column": 4
             },
             "end": {
-              "line": 490,
+              "line": 424,
               "column": 5
             }
           },
@@ -913,31 +719,13 @@
           "column": 10
         },
         "end": {
-          "line": 491,
+          "line": 425,
           "column": 3
         }
       },
       "privacy": "public",
       "superclass": "HTMLElement",
       "attributes": [
-        {
-          "name": "preset-ranges",
-          "description": "(optional:  'px-{datetime}-range-panel')\n\nThe preset date/time ranges to be displayed.\n\n```\n  [\n   {\n     \"displayText\": \"Last 5 Minutes\",\n     \"startDateTime\": \"2013-02-04T22:44:30.652Z\",\n     \"endDateTime\": \"2013-02-04T22:49:30.652Z\"\n   },\n   {\n     \"displayText\": \"Last 12 Hours\",\n     \"startDateTime\": \"2013-02-04T10:44:30.652Z\",\n     \"endDateTime\": \"2013-02-04T22:49:30.652Z\"\n   }\n  ]\n```",
-          "sourceRange": {
-            "file": "bower_components/px-datetime-common/px-datetime-range-behavior.html",
-            "start": {
-              "line": 70,
-              "column": 4
-            },
-            "end": {
-              "line": 70,
-              "column": 24
-            }
-          },
-          "metadata": {},
-          "type": "Object",
-          "inheritedFrom": "pxDatetimeRangeBehavior"
-        },
         {
           "name": "date-format",
           "description": "Moment format string for the DATE format to display/validate this field against\n(see http://momentjs.com/docs/#/parsing/string-format/)",
@@ -1083,8 +871,8 @@
           "type": "boolean"
         },
         {
-          "name": "prevent-notification-on-change",
-          "description": "Used to prevent this element from firing px-datetime-range-submitted event.",
+          "name": "allow-wrap",
+          "description": "Allows the component to wrap the fields and buttons",
           "sourceRange": {
             "start": {
               "line": 223,
@@ -1099,31 +887,15 @@
           "type": "boolean"
         },
         {
-          "name": "allow-wrap",
-          "description": "Allows the component to wrap the fields and buttons",
+          "name": "resources",
+          "description": "List of key/values to be included for translating this component",
           "sourceRange": {
             "start": {
               "line": 230,
               "column": 6
             },
             "end": {
-              "line": 233,
-              "column": 7
-            }
-          },
-          "metadata": {},
-          "type": "boolean"
-        },
-        {
-          "name": "resources",
-          "description": "List of key/values to be included for translating this component",
-          "sourceRange": {
-            "start": {
-              "line": 249,
-              "column": 6
-            },
-            "end": {
-              "line": 260,
+              "line": 241,
               "column": 7
             }
           },
