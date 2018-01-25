@@ -36,7 +36,7 @@ Custom property | Description
 
     <div class$="{{_getWrapClass(allowWrap, showButtons, showFieldTitles)}} dt-position flex">
       <div id="fromFields" class$="{{_getFromFieldClass(allowWrap, showFieldTitles)}}">
-        <span class="a11y">[[localize('from')]]</span>
+        <span class="a11y">[[localize('from date')]]</span>
         <template is="dom-if" if="{{showFieldTitles}}">
           <label>[[localize('From Date')]]</label>
         </template>
@@ -71,6 +71,7 @@ Custom property | Description
       </template>
 
       <div id="toFields" class$="{{_getToFieldClass(showButtons, allowWrap, showFieldTitles)}}">
+        <span class="a11y">[[localize('to date')]]</span>
         <template is="dom-if" if="{{showFieldTitles}}">
           <label>[[localize('To Date')]]</label>
         </template>

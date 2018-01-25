@@ -256,3 +256,52 @@ suite('submit with buttons', function() {
     });
   });
 });
+
+suite('layout', function() {
+  let rangeFxt, showTitlesFxt;
+
+  setup(function(done) {
+    rangeFxt = fixture('range');
+    showTitlesFxt = fixture('show-field-titles');
+    flush(() => {
+      done();
+    });
+  });
+
+  test('when showFieldTitles is false, `TO` is not hidden', function(done) {
+    var spans = Polymer.dom(rangeFxt.root).querySelectorAll('span'),
+        isToSpan = false;
+
+    spans.forEach(function(item){
+      if (item.classList.contains("dt-to")){
+        isToSpan = true;
+      }
+    });
+    assert.equal(isToSpan, true);
+    done();
+  });
+  test('when showFieldTitles is false, field labels are hidden', function(done) {
+    var fieldLabels = Polymer.dom(rangeFxt.root).querySelectorAll('label');
+    assert.equal(fieldLabels.length, 0);
+    done();
+  });
+
+  test('when showFieldTitles is true, `TO` is hidden', function(done) {
+    var spans = Polymer.dom(showTitlesFxt.root).querySelectorAll('span'),
+    isToSpan = false;
+
+    spans.forEach(function(item){
+      if (item.classList.contains("dt-to")){
+        isToSpan = true;
+      }
+    });
+    assert.equal(isToSpan, false);
+    done();
+  });
+  test('when showFieldTitles is true, field labels are not hidden', function(done) {
+    var fieldLabels = Polymer.dom(showTitlesFxt.root).querySelectorAll('label');
+    assert.equal(fieldLabels.length, 2);
+    done();
+  });
+
+});
