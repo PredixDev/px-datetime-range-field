@@ -64,6 +64,7 @@
           hide-icon="{{props.hideIcon.value}}"
           allow-wrap="{{props.allowWrap.value}}"
           show-time-zone="{{props.showTimeZone.value}}"
+          show-field-titles="{{props.showFieldTitles.value}}"
           is-valid="{{props.isValid.value}}"
           time-zone="{{props.timeZone.value}}"
           min-date="{{props.minDate.value}}"
@@ -207,6 +208,12 @@
       allowWrap: {
         type: Boolean,
         defaultValue: true,
+        inputType: 'toggle'
+      },
+
+      showFieldTitles: {
+        type: Boolean,
+        defaultValue: false,
         inputType: 'toggle'
       },
 

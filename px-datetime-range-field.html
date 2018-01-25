@@ -24,6 +24,7 @@ The following custom properties are available for styling. Please also refer to 
 Custom property | Description
 :----------------|:-------------
 `--px-datetime-range-field-to-color` | Text color of the "TO" between start and end date input fields
+`--px-datetime-range-field-margin-between-fields` | When `showFieldTitles` is true this is the amount of space between the fields
 
 @element px-datetime-range-field
 @homepage index.html
@@ -33,9 +34,12 @@ Custom property | Description
   <template>
     <style include="px-datetime-range-field-styles"></style>
 
-    <div class$="{{_getWrapClass(allowWrap)}} dt-position flex flex--top">
-      <div id="fromFields" class$="{{_getFromFieldClass(allowWrap)}}">
+    <div class$="{{_getWrapClass(allowWrap, showButtons, showFieldTitles)}} dt-position flex">
+      <div id="fromFields" class$="{{_getFromFieldClass(allowWrap, showFieldTitles)}}">
         <span class="a11y">[[localize('from')]]</span>
+        <template is="dom-if" if="{{showFieldTitles}}">
+          <label>[[localize('From Date')]]</label>
+        </template>
         <px-datetime-field
           id="fromDate"
           moment-obj="{{_tempFromMomentObj}}"
@@ -61,8 +65,15 @@ Custom property | Description
           <div class="form-field__help validation-error dt-validation-text">[[localize('from cannot be later than to date')]]</div>
         </template>
       </div>
-      <span class="caps dt-to u-mh-">[[localize('TO')]]</span>
-      <div id="toFields" class$="{{_getToFieldClass(showButtons, allowWrap)}}">
+
+      <template is="dom-if" if="{{!showFieldTitles}}">
+        <span class="caps dt-to u-mh-">[[localize('TO')]]</span>
+      </template>
+
+      <div id="toFields" class$="{{_getToFieldClass(showButtons, allowWrap, showFieldTitles)}}">
+        <template is="dom-if" if="{{showFieldTitles}}">
+          <label>[[localize('To Date')]]</label>
+        </template>
         <px-datetime-field
           id="toDate"
           moment-obj="{{_tempToMomentObj}}"
@@ -89,7 +100,6 @@ Custom property | Description
         <px-datetime-buttons
           id="dtBtns"
           is-submit-button-valid="[[isValid]]"
-          class="u-mb"
           resources="[[resources]]"
           language="[[language]]"
           formats="[[formats]]">
@@ -226,6 +236,15 @@ Custom property | Description
         value: false
       },
       /**
+       * This will remove the `to` inbetween the fields and
+       * add titles above the fields. This allows for a
+       * more flexable design.
+       */
+       showFieldTitles: {
+        type: Boolean,
+        value: false
+      },
+      /**
        * List of key/values to be included for translating this component
        */
       resources: {
@@ -283,14 +302,20 @@ Custom property | Description
     /**
      * Helper function to style the outer div
      */
-    _getWrapClass: function(allowWrap) {
-      return allowWrap ? "flex--wrap" : "";
+    _getWrapClass: function(allowWrap, showButtons, showFieldTitles) {
+      var classList= "";
+      classList += allowWrap ? "flex--wrap " : "";
+      classList += (showFieldTitles && showButtons) ? "flex--middle" : "flex--top";
+      return classList;
     },
     /**
      * Helper function to style #fromFields
      */
-    _getFromFieldClass: function(allowWrap){
-      return allowWrap ? "u-pb+" : "";
+    _getFromFieldClass: function(allowWrap, showFieldTitles){
+      var classList= "";
+      classList += allowWrap ? "u-pb+ " : "";
+      classList += showFieldTitles ? "dt-fields-space-between" : "";
+      return classList;
     },
     /**
      * Helper function to style #toFields

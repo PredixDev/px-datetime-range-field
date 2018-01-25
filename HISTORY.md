@@ -1,3 +1,7 @@
+V2.1.0
+==================
+* added ability to display title above the fields through the `showFieldTitles` property
+
 V2.0.2
 ==================
 * added `sudo:required` to travis

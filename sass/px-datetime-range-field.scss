@@ -47,11 +47,15 @@ $inuit-enable-validation-states : true;
   position: relative;
 }
 
-.dt-validation-text{
+.dt-validation-text {
   text-transform: uppercase;
   display: block;
   position: absolute;
   white-space: nowrap;
+}
+
+.dt-fields-space-between {
+  margin-right: var(--px-datetime-range-field-margin-between-fields, calculateRem(10px));
 }
 
 // Trumps
