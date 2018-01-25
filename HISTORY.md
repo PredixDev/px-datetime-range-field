@@ -1,12 +1,16 @@
-V2.0.2
+v2.0.3
+==================
+* Updated to newest px-datetime-common behavior version
+
+v2.0.2
 ==================
 * added `sudo:required` to travis
 
-V2.0.1
+v2.0.1
 ==================
 * fix link in docs
 
-V2.0.0
+v2.0.0
 ==================
 * Polymer 1.X/2.X hybrid support
 * range property has been deleted, please use `fromMoment` and `toMoment` for controlling the range. the px-datetime-range-submitted event still exists when a new range is applied.
