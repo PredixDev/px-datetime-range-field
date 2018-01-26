@@ -134,14 +134,12 @@ Custom property | Description
       /**
        * Moment format string for the TIME format to display/validate this field against
        * (see http://momentjs.com/docs/#/parsing/string-format/)
-       *
        */
       timeFormat: {
           type: String,
           value: 'HH:mm:ss'
       },
       /**
-       *
        * Can be set to show the timezone. Can have 4 possible values:
        *  - 'dropdown': Shows the time zone as a dropdown which the user can use to select a different time zone. Only contains a subset of all time zones.
        *  - 'extendedDropdown': Shows the time zone as a dropdown which the user can use to select a different time zone. Contains all existing time zones (588) from the IANA tz database.
@@ -153,14 +151,14 @@ Custom property | Description
         value: ''
       },
       /**
-       * Controls whether time should be hidden in this field.
+       * Controls whether time should be hidden in the fields.
        */
       hideTime: {
         type: Boolean,
         value: false
       },
       /**
-       * Controls whether date should be hidden in this field.
+       * Controls whether date should be hidden in the fields.
        */
       hideDate: {
         type: Boolean,
@@ -174,7 +172,7 @@ Custom property | Description
         value: false
       },
       /**
-       * Boolean stating if the date, time, or range is valid.
+       * Boolean stating if the date, time, and range are valid.
        */
       isValid: {
         type: Boolean,
@@ -223,14 +221,15 @@ Custom property | Description
         value: false
       },
       /**
-       * Hides the validation messages if set to 'true'
+       * Hide all validation messages
        */
       hideValidationMessages: {
         type: Boolean,
         value: false
       },
       /**
-       * Allows the component to wrap the fields and buttons
+       * Allows the component to wrap the fields and buttons when
+       * the horzontal space can't fit them all on one line.
        */
       allowWrap: {
         type: Boolean,
@@ -345,10 +344,10 @@ Custom property | Description
       }
     },
     /**
-     * Function to determine if the range is valid
+     * Determines if the range is valid
+     * sets `_forcedFailedClass` on fields
      */
     _validateRangeAndFailedClass: function(fromMoment, toMoment) {
-
       if (!this._validateRangeOrder(fromMoment, toMoment)) {
         this.$.fromDate._forcedFailedClass = true;
         this.$.toDate._forcedFailedClass = true;
@@ -360,8 +359,8 @@ Custom property | Description
       }
     },
     /**
-     * Determines which validation message is displayed
-     * Show validation messages for range first, then from, and then to
+     * Determines which validation message to displaye
+     * Show validation messages for range first, then from field, and then to field
      */
     _validationMessagePriority: function (_fromValid, _toValid, _isRangeValid, hideValidationMessages) {
       if (_fromValid !== undefined && _toValid !== undefined) {
@@ -381,7 +380,7 @@ Custom property | Description
       }
     },
     /**
-     * Determines whether to show the range validation error message
+     * Determines whether to show a validation error message
      */
     _handleRangeValidationMessage: function (_isRangeValid, hideValidationMessages) {
       return (hideValidationMessages || _isRangeValid) ? false : true;
@@ -416,11 +415,9 @@ Custom property | Description
       }
     },
     /**
-     * Validates that range is in correct order.
-     * If valid, set the momentObjs from temp.
+     * If valid, sets the momentObjs from temp objects
      */
     _applyChanges: function (preventApply) {
-
       //don't do anything if we have only one field at the moment
       if(!this._isOneFieldEmpty()) {
 
