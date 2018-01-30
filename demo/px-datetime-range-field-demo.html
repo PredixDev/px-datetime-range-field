@@ -68,7 +68,8 @@
           is-valid="{{props.isValid.value}}"
           time-zone="{{props.timeZone.value}}"
           min-date="{{props.minDate.value}}"
-          max-date="{{props.maxDate.value}}">
+          max-date="{{props.maxDate.value}}"
+          required="{{props.required.value}}">
         </px-datetime-range-field>
       </px-demo-component>
       <!-- END Component ------------------------------------------------------>
@@ -194,6 +195,12 @@
       },
 
       hideIcon: {
+        type: Boolean,
+        defaultValue: false,
+        inputType: 'toggle'
+      },
+
+      required: {
         type: Boolean,
         defaultValue: false,
         inputType: 'toggle'

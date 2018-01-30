@@ -1,3 +1,7 @@
+V2.1.2
+==================
+* added required to the demo
+
 V2.1.1
 ==================
 * cleaned up api docs
