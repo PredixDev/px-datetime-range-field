@@ -268,7 +268,8 @@ Custom property | Description
       'enter': '_onEnter'
     },
     observers: [
-      '_validationMessagePriority(_fromValid, _toValid, _isRangeValid, hideValidationMessages)'
+      '_validationMessagePriority(_fromValid, _toValid, _isRangeValid, hideValidationMessages)',
+      '_validateSetMomentObj(fromMoment, toMoment)'
     ],
     listeners: {
       'px-datetime-button-clicked': '_dateTimeButtons',
@@ -333,10 +334,10 @@ Custom property | Description
       return (_fromValid && _toValid && _isRangeValid);
     },
     /**
-     * Whether exaclty one field is currently empty
+     * Whether exactly one field is currently empty
+     * If only one of the two fields has been filled then treat as non valid but don't alert
      */
     _isOneFieldEmpty:function() {
-      //if only one of the two fields has been filled then treat as non valid but don't alert
       if((this._tempFromMomentObj && !this._tempToMomentObj) || (!this._tempFromMomentObj && this._tempToMomentObj)) {
         return true;
       } else {
@@ -359,7 +360,7 @@ Custom property | Description
       }
     },
     /**
-     * Determines which validation message to displaye
+     * Determines which validation message to display
      * Show validation messages for range first, then from field, and then to field
      */
     _validationMessagePriority: function (_fromValid, _toValid, _isRangeValid, hideValidationMessages) {
@@ -413,6 +414,21 @@ Custom property | Description
       } else {
         this._applyChanges(true);
       }
+    },
+    /**
+     * Run validation on a moment objects that have been set from the outside
+     * This will set or unset validation errors
+     *
+     * Run validation on the individual fields then on the range order
+     *
+     * Useful for rangepicker to revalidate fields when interacting
+     * with the panel
+     */
+    _validateSetMomentObj: function(fromMoment, toMoment) {
+      if(fromMoment === undefined || toMoment === undefined) {return; }
+      this._validateMomentObj(fromMoment);
+      this._validateMomentObj(toMoment);
+      this._validateRangeAndFailedClass(this.fromMoment, this.toMoment) ? this._isRangeValid = true : this._isRangeValid = false;
     },
     /**
      * If valid, sets the momentObjs from temp objects

@@ -73,6 +73,8 @@ suite('Navigation', function() {
   });
 });
 
+
+
 suite('submit without buttons', function() {
   let range, fields, fromEntries, fromTimeCells;
 
@@ -163,8 +165,9 @@ suite('submit without buttons', function() {
       done();
     }, 100);
   });
-
 });
+
+
 
 suite('submit with buttons', function() {
   let range, fireKeyboardEvent;
@@ -256,6 +259,52 @@ suite('submit with buttons', function() {
     });
   });
 });
+
+
+
+suite('Passed in moment objs', function() {
+  let range;
+
+  setup(function(done) {
+    range = fixture('range');
+    flush(()=>{
+      done();
+    });
+  });
+
+  test('fails if invalid future date', function(done) {
+    range.blockFutureDates = true;
+    range.fromMoment = Px.moment().startOf('day').subtract(1, 'days');
+    range.toMoment = Px.moment().startOf('day').add(5, 'days');
+
+    flush(()=>{
+      assert.isFalse(range.isValid, "validation should fail, future dates not allowed");
+      done();
+    });
+  });
+  test('passes if future dates allowed', function(done) {
+    range.fromMoment = Px.moment().startOf('day').subtract(1, 'days');
+    range.toMoment = Px.moment().startOf('day').add(5, 'days');
+
+    flush(()=>{
+      assert.isTrue(range.isValid, "validation should pass, future dates are allowed");
+      done();
+    });
+  });
+
+  test('fails if dates are inverted', function(done) {
+    range.fromMoment = Px.moment().startOf('day').add(1, 'days');
+    range.toMoment = Px.moment().startOf('day').subtract(5, 'days');
+
+    flush(()=>{
+      assert.isFalse(range.isValid, "validation should fail, range is inverted");
+      done();
+    });
+  });
+
+});
+
+
 
 suite('layout', function() {
   let rangeFxt, showTitlesFxt;

@@ -1,3 +1,7 @@
+V2.1.3
+==================
+* added validation when fromMoment and toMoment are passed in
+
 V2.1.2
 ==================
 * added required to the demo
