@@ -1,3 +1,7 @@
+V2.1.4
+==================
+* fixing demo pages for IE11
+
 V2.1.3
 ==================
 * added validation when fromMoment and toMoment are passed in
