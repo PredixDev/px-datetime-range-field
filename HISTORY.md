@@ -1,3 +1,7 @@
+V2.1.5
+==================
+* added more flexibility for position the fields
+
 V2.1.4
 ==================
 * fixing demo pages for IE11

@@ -34,7 +34,7 @@ Custom property | Description
   <template>
     <style include="px-datetime-range-field-styles"></style>
 
-    <div class$="{{_getWrapClass(allowWrap, showButtons, showFieldTitles)}} dt-position flex">
+    <div class$="{{_getWrapClass(allowWrap, showButtons, showFieldTitles)}} dt-fields-justify dt-position flex">
       <div id="fromFields" class$="{{_getFromFieldClass(allowWrap, showFieldTitles)}}">
         <span class="a11y">[[localize('from date')]]</span>
         <template is="dom-if" if="{{showFieldTitles}}">

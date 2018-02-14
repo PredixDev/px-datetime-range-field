@@ -43,6 +43,10 @@ $inuit-enable-validation-states : true;
   align-items: center;
 }
 
+.dt-fields-justify {
+  justify-content: var(--px-datetime-range-field-justify-fields);
+}
+
 .dt-position {
   position: relative;
 }
