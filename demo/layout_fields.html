@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Predix UI</title>
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../polymer/polymer.html" />
+  <link rel="import" href="../../px-theme/px-theme-styles.html">
+  <link rel="import" href="../px-datetime-range-field.html" />
+
+  <custom-style>
+    <style include="px-theme-styles" is="custom-style">
+      .demo {
+        /* For IE */
+        --px-datetime-range-field-margin-between-fields: 50px;
+      }
+    </style>
+  </custom-style>
+</head>
+<body>
+  <div style="width: 100%; margin-bottom: 30px;">
+    <px-datetime-range-field class="demo"
+      full-width
+      allow-wrap
+      show-Field-Titles
+      show-time-zone="abbreviatedText">
+    </px-datetime-range-field>
+  </div>
+  <div style="width: 100%; margin-bottom: 30px;">
+    <px-datetime-range-field class="demo"
+      full-width
+      allow-wrap
+      hide-time
+      show-Field-Titles>
+    </px-datetime-range-field>
+  </div>
+  <div style="width: 100%; margin-bottom: 30px;">
+    <px-datetime-range-field class="demo"
+      full-width
+      allow-wrap
+      hide-time
+      show-Field-Titles>
+    </px-datetime-range-field>
+  </div>
+  <div style="width: 100%; margin-bottom: 30px;">
+    <px-datetime-range-field class="demo"
+      full-width
+      allow-wrap
+      show-Field-Titles>
+    </px-datetime-range-field>
+  </div>
+</body>
+</html>
+

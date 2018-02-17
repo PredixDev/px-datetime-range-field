@@ -34,8 +34,8 @@ Custom property | Description
   <template>
     <style include="px-datetime-range-field-styles"></style>
 
-    <div class$="{{_getWrapClass(allowWrap, showButtons, showFieldTitles)}} dt-fields-justify dt-position flex">
-      <div id="fromFields" class$="{{_getFromFieldClass(allowWrap, showFieldTitles)}}">
+    <div class$="{{_getWrapClass(allowWrap, showButtons, showFieldTitles)}} flex dt-fields-justify dt-position">
+      <div id="fromFields" class$="{{_getFromFieldClass(allowWrap, showFieldTitles)}} dt-field-wrapper">
         <span class="a11y">[[localize('from date')]]</span>
         <template is="dom-if" if="{{showFieldTitles}}">
           <label>[[localize('From Date')]]</label>
@@ -70,7 +70,7 @@ Custom property | Description
         <span class="caps dt-to u-mh-">[[localize('TO')]]</span>
       </template>
 
-      <div id="toFields" class$="{{_getToFieldClass(showButtons, allowWrap, showFieldTitles)}}">
+      <div id="toFields" class$="{{_getToFieldClass(showButtons, allowWrap, showFieldTitles)}} dt-field-wrapper">
         <span class="a11y">[[localize('to date')]]</span>
         <template is="dom-if" if="{{showFieldTitles}}">
           <label>[[localize('To Date')]]</label>

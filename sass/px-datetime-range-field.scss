@@ -43,8 +43,26 @@ $inuit-enable-validation-states : true;
   align-items: center;
 }
 
+//FLEXIBLE LAYOUTS FOR THE FIELDS
 .dt-fields-justify {
-  justify-content: var(--px-datetime-range-field-justify-fields);
+  justify-content: var(--px-datetime-range-field-justify-fields, flex-start);
+}
+
+:host([full-width]){
+  .dt-field-wrapper {
+    flex-grow: 1;
+  }
+  @supports (display: grid) {
+    .dt-fields-justify {
+      display: grid;
+      grid-gap: calculateRem(20px) var(--px-datetime-range-field-margin-between-fields, calculateRem(10px));
+      grid-template-columns: repeat(auto-fit, minmax(var(--px-datetime-range-field-column-min-width, 250px), 1fr));
+    }
+    .dt-fields-space-between {
+      margin-right: 0; //uses grid-gap
+    }
+  }
+
 }
 
 .dt-position {
