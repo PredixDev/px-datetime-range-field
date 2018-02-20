@@ -13,18 +13,21 @@
   <custom-style>
     <style include="px-theme-styles" is="custom-style">
       .demo {
-        /* For IE */
-        --px-datetime-range-field-margin-between-fields: 50px;
+        --px-datetime-range-field-margin-between-fields: 20px;
+      }
+      .demo-flex {
+        --px-datetime-range-field-justify-fields: space-between;
       }
     </style>
   </custom-style>
 </head>
 <body>
+  <p>grid layout: fullWidth, allowWrap, and howFieldTitles</p>
   <div style="width: 100%; margin-bottom: 30px;">
     <px-datetime-range-field class="demo"
       full-width
       allow-wrap
-      show-Field-Titles
+      show-field-titles
       show-time-zone="abbreviatedText">
     </px-datetime-range-field>
   </div>
@@ -33,7 +36,17 @@
       full-width
       allow-wrap
       hide-time
-      show-Field-Titles>
+      show-field-titles>
+    </px-datetime-range-field>
+  </div>
+  <p>flex layout: fullWidth, allowWrap, howFieldTitles, showButtons</p>
+  <div style="width: 100%; margin-bottom: 30px;">
+    <px-datetime-range-field class="demo"
+      full-width
+      allow-wrap
+      show-field-titles
+      show-buttons
+      show-time-zone="abbreviatedText">
     </px-datetime-range-field>
   </div>
   <div style="width: 100%; margin-bottom: 30px;">
@@ -41,14 +54,23 @@
       full-width
       allow-wrap
       hide-time
-      show-Field-Titles>
+      show-field-titles
+      show-buttons>
+    </px-datetime-range-field>
+  </div>
+  <p>flex class: allowWrap and css variable</p>
+  <div style="width: 100%; margin-bottom: 30px;">
+    <px-datetime-range-field class="demo demo-flex"
+      allow-wrap
+      show-field-titles>
     </px-datetime-range-field>
   </div>
   <div style="width: 100%; margin-bottom: 30px;">
+    <p>fullWidth without showFieldTitles</p>
     <px-datetime-range-field class="demo"
       full-width
       allow-wrap
-      show-Field-Titles>
+      hide-time>
     </px-datetime-range-field>
   </div>
 </body>

@@ -24,7 +24,10 @@ The following custom properties are available for styling. Please also refer to 
 Custom property | Description
 :----------------|:-------------
 `--px-datetime-range-field-to-color` | Text color of the "TO" between start and end date input fields
+`--px-datetime-field-margin-bottom` | Sets the margin under the fields
 `--px-datetime-range-field-margin-between-fields` | When `showFieldTitles` is true this is the amount of space between the fields
+`--px-datetime-range-field-column-min-width` | When `fullWidth` is true this sets the min-width that each field is allowed to be before the grid wraps.
+`--px-datetime-range-field-justify-fields` | Sets the flex `justify-content` value for the fields
 
 @element px-datetime-range-field
 @homepage index.html
@@ -229,20 +232,45 @@ Custom property | Description
       },
       /**
        * Allows the component to wrap the fields and buttons when
-       * the horzontal space can't fit them all on one line.
+       * the horizontal space can't fit them all on one line.
+       *
+       * Fields will automatically wrap if `fullWidth` is set to true.
        */
       allowWrap: {
         type: Boolean,
         value: false
       },
       /**
-       * This will remove the `to` inbetween the fields and
+       * For layout purposes.
+       * This will display grid the fields. `showFieldTitles` must be true for styles to take effect.
+       *
+       * `--px-datetime-range-field-column-min-width` (default: 250px) - controls
+       * the min-width that each field is allowed to be before the grid wraps.
+       *
+       * `--px-datetime-range-field-margin-between-fields` (default: 10px) - controls
+       * the horizontal spacing between the fields.
+       *
+       * This means each field will take up half of the container that `px-datetime-range-field`
+       * is in, minus the space between the fields. When the container scales smaller than 510px or
+       * `(--px-datetime-range-field-column-min-width * 2 + --px-datetime-range-field-margin-between-fields)`.
+       *
+       * The fields will wrap under each other regardless of the `allow-wrap` prop in every browser except for IE.
+       * Setting this property will override anything set in the `--px-datetime-range-field-justify-fields`
+       */
+      fullWidth: {
+        type: Boolean,
+        value: false,
+        reflectToAttribute: true
+      },
+      /**
+       * This will remove the `to` in-between the fields and
        * add titles above the fields. This allows for a
-       * more flexable design.
+       * more flexible design.
        */
        showFieldTitles: {
         type: Boolean,
-        value: false
+        value: false,
+        reflectToAttribute: true
       },
       /**
        * List of key/values to be included for translating this component
@@ -314,7 +342,6 @@ Custom property | Description
      */
     _getFromFieldClass: function(allowWrap, showFieldTitles){
       var classList= "";
-      classList += allowWrap ? "u-pb+ " : "";
       classList += showFieldTitles ? "dt-fields-space-between" : "";
       return classList;
     },
@@ -324,7 +351,6 @@ Custom property | Description
     _getToFieldClass: function(showButtons, allowWrap){
       var classList= "";
       classList += showButtons ? "u-mr- " : "";
-      classList += (allowWrap && showButtons) ? "u-pb+" : "";
       return classList;
     },
     /**

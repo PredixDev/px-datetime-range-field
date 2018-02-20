@@ -12,13 +12,13 @@
 <link rel="import" href="../../px-demo/px-demo-code-editor.html" />
 
 <!-- Imports for this component -->
- 
+
 <link rel="import" href="../px-datetime-range-field.html" />
 
 <!-- Demo DOM module -->
 <dom-module id="px-datetime-range-field-demo">
   <template>
- 
+
 
     <!-- Header -->
     <px-demo-header
@@ -61,6 +61,7 @@
           hide-date="{{props.hideDate.value}}"
           hide-icon="{{props.hideIcon.value}}"
           allow-wrap="{{props.allowWrap.value}}"
+          full-width="{{props.fullWidth.value}}"
           show-time-zone="{{props.showTimeZone.value}}"
           show-field-titles="{{props.showFieldTitles.value}}"
           is-valid="{{props.isValid.value}}"
@@ -213,6 +214,12 @@
       allowWrap: {
         type: Boolean,
         defaultValue: true,
+        inputType: 'toggle'
+      },
+
+      fullWidth: {
+        type: Boolean,
+        defaultValue: false,
         inputType: 'toggle'
       },
 
