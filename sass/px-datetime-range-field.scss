@@ -54,7 +54,7 @@ px-datetime-field {
 }
 
 :host([full-width][show-field-titles]){
-  // fallback for IE ಠ_ಠ
+  // fallback for IE
   .dt-field-wrapper {
     flex-grow: 1;
   }

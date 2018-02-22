@@ -329,12 +329,6 @@ suite('layout', function() {
     assert.equal(isToSpan, true);
     done();
   });
-  test('when showFieldTitles is false, field labels are hidden', function(done) {
-    var fieldLabels = Polymer.dom(rangeFxt.root).querySelectorAll('label');
-    assert.equal(fieldLabels.length, 0);
-    done();
-  });
-
   test('when showFieldTitles is true, `TO` is hidden', function(done) {
     var spans = Polymer.dom(showTitlesFxt.root).querySelectorAll('span'),
     isToSpan = false;
@@ -347,10 +341,52 @@ suite('layout', function() {
     assert.equal(isToSpan, false);
     done();
   });
+
+  test('when showFieldTitles is false, field labels are hidden', function(done) {
+    var fieldLabels = Polymer.dom(rangeFxt.root).querySelectorAll('label');
+    assert.equal(fieldLabels.length, 0);
+    done();
+  });
   test('when showFieldTitles is true, field labels are not hidden', function(done) {
     var fieldLabels = Polymer.dom(showTitlesFxt.root).querySelectorAll('label');
     assert.equal(fieldLabels.length, 2);
     done();
   });
 
+  test('when showFieldTitles is true, display flex', function(done) {
+    var displayDiv = Polymer.dom(showTitlesFxt.root).querySelector('.dt-fields-justify');
+
+    flush(() => {
+      var styles = window.getComputedStyle(displayDiv).display;
+      assert.equal(styles, "flex");
+      done();
+    });
+  });
+  test('when showFieldTitles and fullWidth are true, display grid', function(done) {
+    var displayDiv = Polymer.dom(showTitlesFxt.root).querySelector('.dt-fields-justify');
+    showTitlesFxt.fullWidth = true;
+
+    flush(() => {
+      var styles = window.getComputedStyle(displayDiv).display,
+          isIE11 = !!navigator.userAgent.match(/Trident\/7\./);
+      if (isIE11) {
+        //IE doesn't support grid, it falls back to flex
+        assert.equal(styles, "flex");
+      } else {
+        assert.equal(styles, "grid");
+      }
+      done();
+    });
+  });
+  test('when showFieldTitles, fullWidth, showButtons are true, display flex', function(done) {
+    var displayDiv = Polymer.dom(showTitlesFxt.root).querySelector('.dt-fields-justify');
+    showTitlesFxt.fullWidth = true;
+    showTitlesFxt.showButtons = true;
+
+    flush(() => {
+      var styles = window.getComputedStyle(displayDiv).display;
+      assert.equal(styles, "flex");
+      done();
+    });
+  });
 });
