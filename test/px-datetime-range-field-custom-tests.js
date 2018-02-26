@@ -369,7 +369,8 @@ suite('layout', function() {
     flush(() => {
       var styles = window.getComputedStyle(displayDiv).display,
           isIE11 = !!navigator.userAgent.match(/Trident\/7\./);
-      if (isIE11) {
+          isSafari = !!navigator.userAgent.match(/AppleWebKit\/602\./);
+      if (isIE11 || isSafari) {
         //IE doesn't support grid, it falls back to flex
         assert.equal(styles, "flex");
       } else {
