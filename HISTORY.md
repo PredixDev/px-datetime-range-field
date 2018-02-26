@@ -1,3 +1,7 @@
+V2.2.0
+==================
+* added `fullWidth` to layout field using css-grid
+
 V2.1.5
 ==================
 * added more flexibility for position the fields
