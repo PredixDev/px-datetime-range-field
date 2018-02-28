@@ -1,3 +1,7 @@
+V2.2.1
+==================
+* Set bottom padding to 0 by default to align better with other input fields
+
 V2.2.0
 ==================
 * added `fullWidth` to layout field using css-grid
