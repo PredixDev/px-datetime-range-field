@@ -1,6 +1,6 @@
 {
   "name": "px-datetime-range-field",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "main": [
     "px-datetime-range-field.html"
   ],
@@ -28,7 +28,8 @@
   "dependencies": {
     "polymer": "#1.9 - 2",
     "px-datetime-common": "^3.0.0",
-    "px-datetime-field": "^2.0.0"
+    "px-datetime-field": "^2.0.0",
+    "px-overlay": "^2.0.0"
   },
   "devDependencies": {
     "px-theme": "^3.0.0",

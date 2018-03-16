@@ -1,5 +1,9 @@
 V2.2.1
 ==================
+* Added ability to hoist timezone dropdown
+
+V2.3.0
+==================
 * Set bottom padding to 0 by default to align better with other input fields
 
 V2.2.0

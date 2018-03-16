@@ -6,6 +6,7 @@
 <link rel="import" href="../px-datetime-common/px-datetime-buttons.html"/>
 <link rel="import" href="../px-datetime-field/px-datetime-field.html"/>
 <link rel="import" href="../px-datetime-common/px-datetime-validate.html"/>
+<link rel="import" href="../px-overlay/px-overlay-behavior.html"/>
 <link rel="import" href="css/px-datetime-range-field-styles.html"/>
 
 <!--
@@ -62,7 +63,9 @@ Custom property | Description
           formats="[[formats]]"
           min-date="[[minDate]]"
           max-date="[[maxDate]]"
-          required="[[required]]">
+          required="[[required]]"
+          hoist="[[hoist]]"
+          container-type="[[containerType]]">
         </px-datetime-field>
         <template is="dom-if" if="{{_handleRangeValidationMessage(_isRangeValid, hideValidationMessages)}}">
           <div class="form-field__help validation-error dt-validation-text">[[localize('from cannot be later than to date')]]</div>
@@ -97,7 +100,9 @@ Custom property | Description
           formats="[[formats]]"
           min-date="[[minDate]]"
           max-date="[[maxDate]]"
-          required="[[required]]">
+          required="[[required]]"
+          hoist="[[hoist]]"
+          container-type="[[containerType]]">
         </px-datetime-field>
       </div>
       <template is="dom-if" if="{{showButtons}}">
@@ -121,7 +126,8 @@ Custom property | Description
     behaviors: [
       PxDatetimeBehavior.TempRange,
       PxDatetimeBehavior.Buttons,
-      PxDatetimeBehavior.Validate
+      PxDatetimeBehavior.Validate,
+      PxOverlayBehavior.sharedProperties
     ],
 
     properties: {
@@ -286,6 +292,13 @@ Custom property | Description
             }
           };
         }
+      },
+      /**
+       * Specifies if the dropdown content should get hoisted to a container in order to escape its current stacking context
+       */
+       hoist: {
+        type: Boolean,
+        value: false
       }
     },
     /**
