@@ -50,6 +50,7 @@ px-datetime-field {
 
 //FLEXIBLE LAYOUTS FOR THE FIELDS
 .dt-fields-justify {
+  display: var(--px-datetime-range-field-display, flex);
   justify-content: var(--px-datetime-range-field-justify-fields, flex-start);
 }
 

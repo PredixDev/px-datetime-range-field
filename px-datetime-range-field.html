@@ -25,6 +25,7 @@ The following custom properties are available for styling. Please also refer to 
 Custom property | Description
 :----------------|:-------------
 `--px-datetime-range-field-to-color` | Text color of the "TO" between start and end date input fields
+`--px-datetime-range-field-display` |
 `--px-datetime-field-margin-bottom` | Sets the margin under the fields. If allowWrap is true this should be set to 20px.
 `--px-datetime-range-field-margin-between-fields` | When `showFieldTitles` is true this is the amount of space between the fields
 `--px-datetime-range-field-column-min-width` | When `fullWidth` is true this sets the min-width that each field is allowed to be before the grid wraps.
@@ -38,7 +39,7 @@ Custom property | Description
   <template>
     <style include="px-datetime-range-field-styles"></style>
 
-    <div class$="{{_getWrapClass(allowWrap, showButtons, showFieldTitles)}} flex dt-fields-justify dt-position">
+    <div class$="{{_getWrapClass(allowWrap, showButtons, showFieldTitles)}} dt-fields-justify dt-position">
       <div id="fromFields" class$="{{_getFromFieldClass(allowWrap, showFieldTitles)}} dt-field-wrapper">
         <span class="a11y">[[localize('from date')]]</span>
         <template is="dom-if" if="{{showFieldTitles}}">
