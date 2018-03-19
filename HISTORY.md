@@ -1,3 +1,7 @@
+V2.3.2
+==================
+* exposed `--px-datetime-range-field-margin-between-fields-overwrite` css var
+
 V2.3.1
 ==================
 * exposed `--px-datetime-range-field-display` css var

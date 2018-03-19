@@ -67,7 +67,7 @@ px-datetime-field {
       grid-template-columns: repeat(auto-fit, minmax(var(--px-datetime-range-field-column-min-width, 250px), 1fr)); //the fields will expand to the full width of their container, they will wrap when an individual field hits the min-width
     }
     .dt-fields-space-between {
-      margin-right: 0; //uses grid-gap
+      margin-right: var(--px-datetime-range-field-margin-between-fields-overwrite, 0); //uses grid-gap
     }
   }
 }
