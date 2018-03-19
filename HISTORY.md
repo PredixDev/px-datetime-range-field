@@ -1,8 +1,12 @@
-V2.2.1
+V2.3.1
+==================
+* exposed `--px-datetime-range-field-display` css var
+
+V2.3.0
 ==================
 * Added ability to hoist timezone dropdown
 
-V2.3.0
+V2.2.1
 ==================
 * Set bottom padding to 0 by default to align better with other input fields
 

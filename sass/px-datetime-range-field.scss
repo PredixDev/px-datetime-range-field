@@ -36,7 +36,7 @@ $inuit-enable-validation-states : true;
 
 // Component
 px-datetime-field {
-  padding-bottom: var(--px-datetime-field-margin-bottom, 0);
+  margin-bottom: var(--px-datetime-field-margin-bottom, 0);
   display: inline-block;
   width: 100%;
 }
@@ -61,7 +61,7 @@ px-datetime-field {
   // Layout for every other browser
   @supports (display: grid) {
     .dt-fields-justify {
-      display: grid;
+      display: var(--px-datetime-range-field-display, grid);
       grid-gap: calculateRem(20px) var(--px-datetime-range-field-margin-between-fields, calculateRem(10px)); //always have a vertical gap of 20px, allow horizontal gab to be customized
       grid-template-columns: repeat(auto-fit, minmax(var(--px-datetime-range-field-column-min-width, 250px), 1fr)); //the fields will expand to the full width of their container, they will wrap when an individual field hits the min-width
     }
@@ -74,7 +74,7 @@ px-datetime-field {
 //If buttons are showing we have to override grid to flexbox.
 :host([full-width][show-field-titles][show-buttons]){
   .dt-fields-justify {
-    display:  flex;
+    display: flex;
   }
   .dt-fields-space-between {
     margin-right: var(--px-datetime-range-field-margin-between-fields, calculateRem(10px));
